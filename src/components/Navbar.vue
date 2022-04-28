@@ -2,24 +2,22 @@
 	<div>
 		<nav class="navbar bg-dark navbar-dark navbar-expand-xl">
 			<router-link to="/" class="navbar-brand">
-				<img src="../assets/Icon.png" alt="Icon" title="Logo" />
+				<img src="../assets/Icon2.png" alt="Icon" title="Logo" />
 			</router-link>
 
 			<div class="nav-items">
 				<div class="navbar-nav">
-					<div class="row" id="navLinks">
-						<div id="spacer"></div>
-						<div class="nav-item col-1">
-							<router-link to="/" class="nav-link">Home</router-link>
-						</div>
+					<div id="spacer" style = "width: 100%"></div>
+					<div class="nav-item">
+						<router-link to="/" class="nav-link">Home</router-link>
+					</div>
 
-						<div class="nav-item col-1">
-							<router-link to="/about" class="nav-link">About</router-link>
-						</div>
+					<div class="nav-item">
+						<router-link to="/about" class="nav-link">About</router-link>
+					</div>
 
-						<div class="nav-item col-1">
-							<router-link to="/projects" class="nav-link">Projects</router-link>
-						</div>
+					<div class="nav-item">
+						<router-link to="/projects" class="nav-link">Projects</router-link>
 					</div>
 				</div>
 			</div>
@@ -35,22 +33,10 @@
 		data() {
 			return {};
 		},
-		computed: {
-			numElements() {
-				return document.getElementById("navLinks").children.length - 1;
-			},
-		},
-		mounted() {
-			document
-				.getElementById("spacer")
-				.classList.add("col-" + (12 - this.numElements - 2));
-		},
 	};
 </script>
 
-<style >
-	@import url("http://fonts.cdnfonts.com/css/ocr-a-extended");
-
+<style>
 	.navbar-spacer {
 		height: var(--navbar-height);
 		position: absolute;
@@ -67,6 +53,7 @@
 		width: 100vw;
 		height: var(--navbar-height);
 		z-index: 10;
+		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 	}
 
 	nav,
@@ -87,19 +74,20 @@
 		margin-left: 20px;
 	}
 
-	.navbar-brand img {
+	/* .navbar-brand img {
 		-webkit-filter: drop-shadow(1px 1px 0 gray) drop-shadow(-1px -1px 0 white);
 		filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px -1px 0 black);
-	}
+	} */
 
 	.nav-link {
-		width: 100% !important;
+		width: 150px !important;
 		height: var(--navbar-height);
 		text-align: center;
 		padding-top: 13px;
-		font-family: "OCR A Extended";
+		
 		font-size: 14pt;
 		transition: box-shadow 0.5s;
+		display: inline-block;
 	}
 
 	.nav-link:hover {
@@ -115,7 +103,7 @@
 		width: 100% !important;
 	}
 
-	.nav-item.col-1 {
+	.nav-item {
 		padding: 0 !important;
 		width: 150px !important;
 		align-content: center;
