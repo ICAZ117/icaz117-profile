@@ -1,6 +1,9 @@
 <template>
 	<Navbar />
-	<router-view />
+
+	<div class="applicationDisplay dark-scroll-bar">
+		<router-view />
+	</div>
 	<notifications position="bottom right" />
 </template>
 
@@ -39,7 +42,7 @@
 		font-family: "OCR A Extended", monospace;
 		background-color: var(--grayBG);
 		width: 100vw !important;
-		overflow-x: hidden !important;
+		overflow: hidden !important;
 	}
 
 	.header {
@@ -47,19 +50,24 @@
 	}
 
 	.applicationDisplay {
-		height: 100%;
+        position: absolute;
+        padding-top: var(--navbar-height);
+        top: 0;
+		height: 100vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
 	}
 
 	.dark-scroll-bar {
 		scrollbar-width: thin !important;
 		scrollbar-color: var(--red) transparent !important;
 		overflow-y: scroll !important;
-		margin-right: 5px !important;
+		/* margin-right: 5px !important; */
 	}
 
 	/* Works on Chrome, Edge, and Safari */
 	.dark-scroll-bar::-webkit-scrollbar {
-		width: 10px !important;
+		width: 5px !important;
 	}
 
 	.dark-scroll-bar::-webkit-scrollbar-track {
@@ -69,7 +77,7 @@
 
 	.dark-scroll-bar::-webkit-scrollbar-thumb {
 		background-color: var(--red) !important;
-		border-radius: 50px !important;
-		border: 3px solid var(--grayBG) !important;
+		border-radius: 100px !important;
+		border: 3px solid rgba(255, 255, 255, 0) !important;
 	}
 </style>

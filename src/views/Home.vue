@@ -80,7 +80,7 @@
     import Footer from '../components/Footer.vue';
 
 	export default {
-		name: "Navbar",
+		name: "Home",
         components: {
             Footer,
         },
@@ -120,7 +120,7 @@
 			var ctx = c.getContext("2d");
 
 			//making the canvas full screen
-			c.height = this.height();
+			c.height = 1000;
 			c.width = window.innerWidth;
 
 			//chinese characters - taken from the unicode charset
