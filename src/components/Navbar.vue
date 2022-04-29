@@ -7,7 +7,7 @@
 
 			<div class="nav-items">
 				<div class="navbar-nav">
-					<div id="spacer" style = "width: 100%"></div>
+					<div id="spacer" style="width: 100%"></div>
 					<div class="nav-item">
 						<router-link to="/" class="nav-link">Home</router-link>
 					</div>
@@ -23,7 +23,7 @@
 			</div>
 		</nav>
 
-		<div class="navbar-spacer"></div>
+		<div id="navbar-spacer"></div>
 	</div>
 </template>
 
@@ -33,24 +33,27 @@
 		data() {
 			return {};
 		},
+        mounted() {
+            console.log(window.innerWidth);
+        },
 	};
 </script>
 
 <style>
-	.navbar-spacer {
+	#navbar-spacer {
 		height: var(--navbar-height);
 		position: absolute;
-		width: 100vw;
+		width: 1520px;
 		background-color: lime;
 		top: 0;
 		z-index: -5;
+		left: 0;
+		right: 0;
 	}
 
 	nav {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
+		
+		width: 1520px;
 		height: var(--navbar-height);
 		z-index: 10;
 		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
@@ -84,7 +87,7 @@
 		height: var(--navbar-height);
 		text-align: center;
 		padding-top: 13px;
-		
+
 		font-size: 14pt;
 		transition: box-shadow 0.5s;
 		display: inline-block;

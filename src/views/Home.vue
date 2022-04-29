@@ -1,4 +1,5 @@
 <template>
+<div class="dark-">
 	<!-- Matrix BG -->
 	<div class="background">
 		<canvas id="c"></canvas>
@@ -9,7 +10,7 @@
 		<div id="leftCol" class="col-7">
 			<!-- Round self portait -->
 			<img
-				src="https://avatars.githubusercontent.com/u/71295552?v=4"
+				:src="homePage.pfp"
 				alt="Self Portait"
 				class="img-fluid rounded-circle profilePic"
 				:width="imgHeight"
@@ -24,38 +25,93 @@
 			<h5>at Florida Southern College</h5>
 		</div>
 
-        <!-- RIGHT COLUMN -->
+		<!-- RIGHT COLUMN -->
 		<div id="rightCol" class="col-5">
-            <!-- Description -->
+			<!-- Description -->
 			<h3 class="header">About Me</h3>
 			<hr />
 			<p>
-				I am a Full Stack & Software Developer with a passion for creating and building
-				things. I am currently a sophomore Computer Science major at Florida Southern
-				College, and have been programming for 7 years.
+				{{ homePage.description }}
 			</p>
-			<br /><br />
+			<br />
 
-            <!-- Socials -->
-			<div class="row"></div>
+			<!-- Socials -->
+			<h3 class="header">Socials</h3>
+			<hr />
+			<div class="row" id="socials">
+				<div class="col-3">
+					<!-- Discord icon -->
+					<font-awesome-icon
+						@click="copyDiscord"
+						class="icon"
+						:icon="['fab', 'discord']"
+					/>
+				</div>
+				<div class="col-3">
+					<!-- Github icon -->
+					<a :href="homePage.github" target="_blank">
+						<font-awesome-icon class="icon" :icon="['fab', 'github']"
+					/></a>
+				</div>
+                <div class="col-3">
+					<!-- Linkedin icon -->
+					<a :href="homePage.linkedin" target="_blank">
+                        <font-awesome-icon class="icon" :icon="['fab', 'linkedin']" />
+                    </a>
+				</div>
+                <div class="col-3">
+                    <!-- Gmail icon -->
+                    <a :href="'mailto:' + homePage.email" target="_blank">
+                        <font-awesome-icon class="icon" :icon="['fas', 'envelope']" />
+                    </a>
+                </div>
+			</div>
 		</div>
 	</div>
 
-    <!-- DIAGONAL DIVIDER -->
+	<!-- DIAGONAL DIVIDER -->
 	<div id="middleCol" class="col-1"></div>
+    
+    <Footer />
+    </div>
 </template>
 
 <script>
+    import Footer from '../components/Footer.vue';
+
 	export default {
 		name: "Navbar",
+        components: {
+            Footer,
+        },
 		data() {
 			return {
 				imgHeight: window.innerHeight * 0.4,
 			};
 		},
+		methods: {
+			copyDiscord() {
+				navigator.clipboard.writeText("ICAZ117#4716");
+                this.$notify({
+                    title: "Copied!",
+                    text: "Discord ID has been copied to your clipboard!",
+                    type: "error",
+                });
+			},
+            height() {
+                return window.innerHeight - 60;
+            },
+            
+		},
+        computed: {
+            homePage() {
+                return this.$store.getters.getHomePage;
+            },
+        },
+        async beforeMount() {
+            await this.$store.dispatch("fetchHomePage");
+        },
 		mounted() {
-			console.log(window.innerHeight);
-
 			// MATRIX BACKGROUND ON HOME PAGE
 			// NOTE: This is NOT my code. I copied it from here: https://codepen.io/wefiy/pen/WPpEwo
 			// -------------------------------------------------------------------------------------
@@ -64,7 +120,7 @@
 			var ctx = c.getContext("2d");
 
 			//making the canvas full screen
-			c.height = window.innerHeight - 60;
+			c.height = this.height();
 			c.width = window.innerWidth;
 
 			//chinese characters - taken from the unicode charset
@@ -118,14 +174,13 @@
 		overflow: hidden !important;
 	}
 	#leftCol {
-		background-color: #0000007e;
 		z-index: 2 !important;
 		color: white;
 		padding: 1rem 15% 1rem 5rem;
 		text-align: center;
 	}
 	#middleCol {
-		background-color: rgb(var(--bs-dark-rgb));
+		background-color: var(--grayBG);
 		overflow: hidden;
 		transform: skew(10deg);
 		position: absolute;
@@ -139,7 +194,7 @@
 	}
 
 	#rightCol {
-		background-color: rgb(var(--bs-dark-rgb));
+		background-color: var(--grayBG);
 		z-index: 4 !important;
 		color: white;
 		padding: 10rem 2rem 2rem 2rem;
@@ -170,7 +225,26 @@
 		overflow: hidden;
 	}
 
-	.header {
-		color: var(--red);
+	.icon {
+		height: 50px !important;
+		width: 50px !important;
+		border: 3px solid white;
+		padding: 10px;
+		border-radius: 50%;
+		transition: all 0.2s ease-in-out;
 	}
+
+	.icon:hover {
+		border-color: var(--red);
+		transform: scale(1.1);
+        cursor: pointer;
+	}
+
+	#socials {
+		padding-top: 10px;
+        color: white!important;
+	}
+    #socials a {
+        color: white!important;
+    }
 </style>
