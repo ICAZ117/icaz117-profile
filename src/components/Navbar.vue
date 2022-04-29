@@ -19,6 +19,14 @@
 					<div class="nav-item">
 						<router-link to="/projects" class="nav-link">Projects</router-link>
 					</div>
+
+                    <div class="nav-item">
+						<router-link to="/login" class="nav-link">Log In</router-link>
+					</div>
+
+                    <div class="nav-item">
+						<router-link to="/register" class="nav-link">Register</router-link>
+					</div>
 				</div>
 			</div>
 		</nav>

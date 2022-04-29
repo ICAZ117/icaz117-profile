@@ -50,12 +50,12 @@
 	}
 
 	.applicationDisplay {
-        position: absolute;
-        padding-top: var(--navbar-height);
-        top: 0;
+		position: absolute;
+		padding-top: var(--navbar-height);
+		top: 0;
 		height: 100vh;
-        overflow-y: scroll;
-        overflow-x: hidden;
+		overflow-y: scroll;
+		overflow-x: hidden;
 	}
 
 	.dark-scroll-bar {

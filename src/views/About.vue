@@ -100,7 +100,7 @@
 		color: white;
 		padding: 2rem;
 		margin: 0;
-		width: 100vw;
+		width: calc(100vw - 5px);
 		height: calc(100vh - var(--navbar-height));
 		text-align: justify;
 	}
