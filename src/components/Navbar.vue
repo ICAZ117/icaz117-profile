@@ -20,12 +20,15 @@
 						<router-link to="/projects" class="nav-link">Projects</router-link>
 					</div>
 
-                    <div class="nav-item">
+                    <div class="nav-item" v-if="!isLoggedIn">
 						<router-link to="/login" class="nav-link">Log In</router-link>
 					</div>
 
-                    <div class="nav-item">
+                    <div class="nav-item" v-if="!isLoggedIn">
 						<router-link to="/register" class="nav-link">Register</router-link>
+					</div>
+                    <div class="nav-item" v-if="isLoggedIn">
+						<span class="nav-link" @click="logout">Log Out</span>
 					</div>
 				</div>
 			</div>
@@ -36,13 +39,33 @@
 </template>
 
 <script>
+    import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+
 	export default {
 		name: "Navbar",
 		data() {
-			return {};
+			return {
+                isLoggedIn: false,
+            };
 		},
+        methods: {
+            logout() {
+                signOut(getAuth()).then(() => {
+                    this.isLoggedIn = false;
+                });
+            },
+        },
         mounted() {
             console.log(window.innerWidth);
+
+            onAuthStateChanged(getAuth(), (user) => {
+                if (user) {
+                    this.isLoggedIn = true;
+                }
+                else {
+                    this.isLoggedIn = false;
+                }
+            });
         },
 	};
 </script>

@@ -72,7 +72,6 @@
 		data() {
 			return {
 				heights: [],
-                showImages: false,
 			};
 		},
 		methods: {
@@ -89,15 +88,9 @@
 			},
 		},
 		async beforeMount() {
-			await this.$store.dispatch("fetchProjectsPage");
-
-            setTimeout(() => {
+			await this.$store.dispatch("fetchProjectsPage").then((result) => {
                 this.getHeights();
-            }, 500);
-
-            setTimeout(() => {
-                this.showImages = true;
-            }, 750);
+            });
 		},
 	};
 </script>

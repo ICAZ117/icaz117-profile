@@ -13,7 +13,7 @@
 				<h3 class="header">‎</h3>
 				<br />
 				<!-- SIGCSE Image -->
-				<div v-if="showCSImage" id="csImage">
+				<div id="csImage">
 					<img
 						src="../assets/SIGCSE.jpg"
 						alt="SIGCSE Photo"
@@ -28,10 +28,10 @@
 		<!----------------------- Medicine Content ----------------------->
 		<div class="row">
 			<div class="col-6">
-                <h3 class="header">‎</h3>
+				<h3 class="header">‎</h3>
 				<br />
 				<!-- SIGCSE Image -->
-				<div v-if="showCSImage" id="csImage">
+				<div id="csImage">
 					<img
 						src="../assets/OL.jpg"
 						alt="OL Photo"
@@ -39,7 +39,7 @@
 						:height="medContentHeight"
 					/>
 				</div>
-            </div>
+			</div>
 			<div class="col-6">
 				<h3 class="header">Medicine</h3>
 				<hr />
@@ -62,15 +62,14 @@
 		data() {
 			return {
 				csContentHeight: 0,
-                medContentHeight: 0,
-				showCSImage: false,
+				medContentHeight: 0,
 			};
 		},
 		computed: {
 			getCSContentHeight() {
 				return document.getElementById("cs-content").offsetHeight;
 			},
-            getMedContentHeight() {
+			getMedContentHeight() {
 				return document.getElementById("med-content").offsetHeight;
 			},
 			aboutPage() {
@@ -78,17 +77,11 @@
 			},
 		},
 		async beforeMount() {
-			await this.$store.dispatch("fetchAboutPage");
 			var self = this;
-
-			setTimeout(() => {
+			await this.$store.dispatch("fetchAboutPage").then((result) => {
 				self.csContentHeight = self.getCSContentHeight;
-                self.medContentHeight = self.getMedContentHeight;
-			}, 500);
-
-			setTimeout(() => {
-				self.showCSImage = true;
-			}, 750);
+				self.medContentHeight = self.getMedContentHeight;
+			});
 		},
 		mounted() {},
 	};

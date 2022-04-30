@@ -95,7 +95,7 @@
                 this.$notify({
                     title: "Copied!",
                     text: "Discord ID has been copied to your clipboard!",
-                    type: "error",
+                    type: "success",
                 });
 			},
             height() {
