@@ -25,7 +25,7 @@
 </script>
 
 <style>
-	@import url("http://fonts.cdnfonts.com/css/ocr-a-extended");
+	@import url("https://fonts.cdnfonts.com/css/ocr-a-extended");
 
 	:root {
 		--navbar-height: 60px;
