@@ -6,6 +6,7 @@ import Projects from "../views/Projects.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import HiLo from "../views/HiLo.vue";
+import Leaderboard from "../views/Leaderboard.vue";
 
 const routes = [
 	{
@@ -40,7 +41,15 @@ const routes = [
         meta: {
             requiresAuth: true
         }
-    }
+    },
+    {
+        path: "/leaderboard",
+        name: "Leaderboard",
+        component: Leaderboard,
+        meta: {
+            requiresAuth: true
+        }
+    },
 ];
 
 const router = createRouter({

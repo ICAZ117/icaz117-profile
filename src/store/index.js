@@ -135,6 +135,9 @@ const store = createStore({
 		getPb(state) {
 			return state.pb;
 		},
+        getLeaderboard(state) {
+            return state.leaderboard;
+        }
 	},
 });
 

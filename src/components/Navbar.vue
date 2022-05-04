@@ -31,6 +31,9 @@
 						<router-link to="/game" class="nav-link">Game</router-link>
 					</div>
                     <div class="nav-item" v-if="isLoggedIn">
+						<router-link to="/leaderboard" class="nav-link">Rankings</router-link>
+					</div>
+                    <div class="nav-item" v-if="isLoggedIn">
 						<span class="nav-link" @click="logout">Log Out</span>
 					</div>
 				</div>

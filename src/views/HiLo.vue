@@ -49,13 +49,20 @@
 			<h6>Current Streak: {{ streak }}</h6>
 			<h6>Personal Best: {{ this.$store.getters.getPb }}</h6>
 		</div>
+        
 	</div>
+
+    <Footer />
 </template>
 
 <script>
     import { getAuth } from "firebase/auth";
+    import Footer from "../components/Footer.vue";
 
 	export default {
+        components: {
+            Footer
+        },
 		data() {
 			return {
 				gameRunning: false,
