@@ -36,7 +36,7 @@
 					</div>
 					<br />
 					<div class="form-group">
-						<button type="submit" class="submitButton">Login</button>
+						<button type="submit" class="red-button submitButton">Login</button>
 					</div>
 				</form>
 			</div>
@@ -64,6 +64,12 @@
 			async signIn() {
 				await signInWithEmailAndPassword(getAuth(), this.email, this.password)
 					.then(() => {
+                        // Set the user's email in the store
+                        this.$store.commit("setEmail", this.email);
+
+                        // Get the user's username from the database
+                        this.$store.dispatch("fetchUser");
+
 						this.$router.push("/");
 					})
 					.catch((error) => {
@@ -124,21 +130,10 @@
 	.login-body {
 		width: 100%;
 	}
-	.submitButton {
+	
+    .submitButton {
 		width: 100%;
-		height: 40px;
-		border: none;
-		border-radius: 5px;
-		background-color: var(--red);
-		color: white;
-		font-size: 1.2rem;
-		cursor: pointer;
-		/* box-shadow: 0 0 10px var(--red); */
-		transition: all 0.3s ease;
-	}
-
-	.submitButton:hover {
-		box-shadow: 0 0 10px var(--red);
+		font-size: 1.2rem!important;
 	}
 
 	.form-control:focus {

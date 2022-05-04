@@ -17,9 +17,9 @@
 			Footer,
 		},
 		async beforeMount() {
-			await this.$store.dispatch("fetchHomePage");
-			await this.$store.dispatch("fetchAboutPage");
-			await this.$store.dispatch("fetchProjectsPage");
+			// await this.$store.dispatch("fetchHomePage");
+			// await this.$store.dispatch("fetchAboutPage");
+			// await this.$store.dispatch("fetchProjectsPage");
 		},
 	};
 </script>
@@ -79,5 +79,20 @@
 		background-color: var(--red) !important;
 		border-radius: 100px !important;
 		border: 3px solid rgba(255, 255, 255, 0) !important;
+	}
+
+    .red-button {
+		height: 40px;
+		border: none;
+		border-radius: 5px;
+		background-color: var(--red);
+		color: white;
+		font-size: 1.1rem;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.red-button:hover {
+		box-shadow: 0 0 10px var(--red);
 	}
 </style>

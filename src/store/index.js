@@ -24,7 +24,7 @@ const store = createStore({
 	state: {
 		homePage: {
 			pfp: "",
-            description: "",
+			description: "",
 			discord: "",
 			github: "",
 			linkedin: "",
@@ -37,6 +37,10 @@ const store = createStore({
 		projectsPage: {
 			projects: [],
 		},
+		username: "",
+		email: "",
+		pb: 0,
+		leaderboard: [],
 	},
 	mutations: {
 		setHomePage(state, payload) {
@@ -47,6 +51,27 @@ const store = createStore({
 		},
 		setProjectsPage(state, payload) {
 			state.projectsPage = payload;
+		},
+		setUsername(state, payload) {
+			state.username = payload;
+		},
+		setEmail(state, payload) {
+			state.email = payload;
+		},
+		setPb(state, payload) {
+			state.pb = payload;
+		},
+		addLDBScore(state, payload) {
+			state.leaderboard.push(payload);
+			state.leaderboard.sort((a, b) => b.score - a.score);
+
+			if (state.leaderboard.length > 10) {
+				// delete the last element
+                state.leaderboard.pop();
+			}
+		},
+		setLeaderboard(state, payload) {
+			state.leaderboard = payload;
 		},
 	},
 	actions: {
@@ -62,6 +87,37 @@ const store = createStore({
 			const data = await getDoc(doc(db, "pageData", "projectsPage"));
 			commit("setProjectsPage", data.data());
 		},
+		async createUser({ state }) {
+			// Create new user in users table
+			await setDoc(doc(db, "users", state.email), {
+				username: state.username,
+				pb: 0,
+			});
+		},
+		async fetchUser({ commit, state }) {
+			// Get user from users table
+			const data = await getDoc(doc(db, "users", state.email));
+			commit("setUsername", data.data().username);
+			commit("setPb", data.data().pb);
+		},
+        async updatePb({ state }) {
+            // Update user's pb in users table
+            await setDoc(doc(db, "users", state.email), {
+                username: state.username,
+                pb: state.pb,
+            });
+        },
+        async setLeaderboard({ state }) {
+            // Update leaderboard on db
+            await setDoc(doc(db, "leaderboard", "leaderboard"), {
+                scores: state.leaderboard,
+            });
+        },
+		async fetchLeaderboard({ commit }) {
+			// Get leaderboard from leaderboard table
+			const data = await getDoc(doc(db, "leaderboard", "leaderboard"));
+			commit("setLeaderboard", data.data().scores);
+		},
 	},
 	getters: {
 		getHomePage(state) {
@@ -72,6 +128,12 @@ const store = createStore({
 		},
 		getProjectsPage(state) {
 			return state.projectsPage;
+		},
+		getUsername(state) {
+			return state.username;
+		},
+		getPb(state) {
+			return state.pb;
 		},
 	},
 });

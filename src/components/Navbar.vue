@@ -2,7 +2,7 @@
 	<div>
 		<nav class="navbar bg-dark navbar-dark navbar-expand-xl">
 			<router-link to="/" class="navbar-brand">
-				<img src="../assets/Icon2.png" alt="Icon" title="Logo" />
+				<img src="../assets/Icon.png" alt="Icon" title="Logo" />
 			</router-link>
 
 			<div class="nav-items">
@@ -26,6 +26,9 @@
 
                     <div class="nav-item" v-if="!isLoggedIn">
 						<router-link to="/register" class="nav-link">Register</router-link>
+					</div>
+                    <div class="nav-item" v-if="isLoggedIn">
+						<router-link to="/game" class="nav-link">Game</router-link>
 					</div>
                     <div class="nav-item" v-if="isLoggedIn">
 						<span class="nav-link" @click="logout">Log Out</span>
@@ -52,6 +55,7 @@
             logout() {
                 signOut(getAuth()).then(() => {
                     this.isLoggedIn = false;
+                    this.$router.push("/");
                 });
             },
         },
@@ -108,10 +112,10 @@
 		margin-left: 20px;
 	}
 
-	/* .navbar-brand img {
+	.navbar-brand img {
 		-webkit-filter: drop-shadow(1px 1px 0 gray) drop-shadow(-1px -1px 0 white);
 		filter: drop-shadow(1px 1px 0 white) drop-shadow(-1px -1px 0 black);
-	} */
+	}
 
 	.nav-link {
 		width: 150px !important;
