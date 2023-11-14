@@ -1,5 +1,5 @@
 <template>
-	<Navbar />
+	<NewNav />
 
 	<div class="applicationDisplay dark-scroll-bar">
 		<router-view />
@@ -8,12 +8,12 @@
 </template>
 
 <script>
-	import Navbar from "./components/Navbar.vue";
+	import NewNav from "./components/NewNav.vue";
 	import Footer from "./components/Footer.vue";
 
 	export default {
 		components: {
-			Navbar,
+			NewNav,
 			Footer,
 		},
 		async beforeMount() {
@@ -54,6 +54,7 @@
 		padding-top: var(--navbar-height);
 		top: 0;
 		height: 100vh;
+        width: 100vw;
 		overflow-y: scroll;
 		overflow-x: hidden;
 	}
@@ -66,22 +67,25 @@
 	}
 
 	/* Works on Chrome, Edge, and Safari */
-	.dark-scroll-bar::-webkit-scrollbar {
+	.dark-scroll-bar::-webkit-scrollbar,
+	::-webkit-scrollbar {
 		width: 5px !important;
 	}
 
-	.dark-scroll-bar::-webkit-scrollbar-track {
+	.dark-scroll-bar::-webkit-scrollbar-track,
+	::-webkit-scrollbar-track {
 		background: transparent !important;
 		border-radius: 50px !important;
 	}
 
-	.dark-scroll-bar::-webkit-scrollbar-thumb {
+	.dark-scroll-bar::-webkit-scrollbar-thumb,
+	::-webkit-scrollbar-thumb {
 		background-color: var(--red) !important;
 		border-radius: 100px !important;
 		border: 3px solid rgba(255, 255, 255, 0) !important;
 	}
 
-    .red-button {
+	.red-button {
 		height: 40px;
 		border: none;
 		border-radius: 5px;

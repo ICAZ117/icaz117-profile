@@ -13,43 +13,60 @@ const routes = [
 		path: "/",
 		name: "Home",
 		component: Home,
+        meta: {
+            title: "Home | ICAZ117"
+        }
 	},
 	{
 		path: "/about",
 		name: "About",
 		component: About,
+        meta: {
+            title: "About | ICAZ117"
+        }
 	},
 	{
 		path: "/projects",
 		name: "Projects",
 		component: Projects,
+        meta: {
+            title: "Projects | ICAZ117"
+        }
 	},
-    {
-        path: "/login",
-        name: "Login",
-        component: Login,
-    },
-    {
-        path: "/register",
-        name: "Register",
-        component: Register,
-    },
-    {
-        path: "/game",
-        name: "HiLo",
-        component: HiLo,
+	{
+		path: "/login",
+		name: "Login",
+		component: Login,
         meta: {
-            requiresAuth: true
+            title: "Login | ICAZ117"
         }
-    },
-    {
-        path: "/leaderboard",
-        name: "Leaderboard",
-        component: Leaderboard,
+	},
+	{
+		path: "/register",
+		name: "Register",
+		component: Register,
         meta: {
-            requiresAuth: true
+            title: "Register | ICAZ117"
         }
-    },
+	},
+	{
+		path: "/game",
+		name: "HiLo",
+		component: HiLo,
+		meta: {
+            title: "Hi-Lo | ICAZ117",
+			requiresAuth: true,
+		},
+	},
+	{
+		path: "/leaderboard",
+		name: "Leaderboard",
+		component: Leaderboard,
+		meta: {
+            title: "Leaderboard | ICAZ117",
+			requiresAuth: true,
+		},
+	},
 ];
 
 const router = createRouter({
@@ -58,27 +75,38 @@ const router = createRouter({
 });
 
 const getCurrentUser = () => {
-    return new Promise((resolve, reject) => {
-        const removeListener = onAuthStateChanged(getAuth(), (user) => {
-            removeListener();
-            resolve(user);
-        }, reject);
-    });
+	return new Promise((resolve, reject) => {
+		const removeListener = onAuthStateChanged(
+			getAuth(),
+			(user) => {
+				removeListener();
+				resolve(user);
+			},
+			reject
+		);
+	});
 };
 
 router.beforeEach(async (to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (await getCurrentUser()) {
-            next();
-        }
-        else {
-            alert("*In General Kenobi's Voice* This is not the page you're looking for!");
-            next("/");
-        }
-    }
-    else {
-        next();
-    }
+	if (to.matched.some((record) => record.meta.requiresAuth)) {
+		if (await getCurrentUser()) {
+			next();
+		} else {
+			alert(
+				"*In General Kenobi's Voice* This is not the page you're looking for!"
+			);
+			next("/");
+		}
+	} else {
+		next();
+	}
+});
+
+router.beforeEach((toRoute, fromRoute, next) => {
+	window.document.title =
+		toRoute.meta && toRoute.meta.title ? toRoute.meta.title : "Home";
+
+	next();
 });
 
 export default router;
