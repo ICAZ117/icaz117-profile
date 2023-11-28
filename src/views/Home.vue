@@ -38,7 +38,7 @@
 				<!-- Socials -->
 				<h3 class="header">Socials</h3>
 				<hr />
-				<div class="row" id="socials" style="max-height: 232px">
+				<div class="row" id="socials">
 					<div
 						class="col-lg-3 col-md-4 col-sm-6 col-xs-12"
 						v-for="social in homePage.socials"
@@ -68,14 +68,15 @@
 			}"
 			:leftColor="'transparent;'"
 			:rightColor="'var(--grayBG); border-left: 5px solid var(--red); color: white;'"
-			:height="(windowHeight - 61 >= 700) ? windowHeight - 61 : 700"
+			:height="windowHeight - 61 >= 700 ? windowHeight - 61 : 700"
 			:padding="'60px 0 0 0'"
 			:maintainSkewbox="false"
 			:pictureSide="'left'"
 			:invert="true"
 			style="transform: scaleY(-1)"
 			:key="windowHeight"
-            :matrix="true"
+			:matrix="true"
+			v-if="false"
 		>
 			<template v-slot:left>
 				<div
@@ -92,7 +93,7 @@
 						:src="homePage.pfp"
 						alt="Self Portait"
 						class="img-fluid rounded-circle profilePic"
-						:width="(imgHeight >= 250) ? imgHeight : 250"
+						:width="imgHeight >= 250 ? imgHeight : 250"
 					/>
 					<br />
 					<br />
@@ -105,7 +106,7 @@
 				</div>
 			</template>
 			<template v-slot:right>
-				<div style="transform: scaleY(-1)">
+				<div style="transform: scaleY(-1); padding-top: 3rem">
 					<!-- Description -->
 					<h3 class="header">About Me</h3>
 					<hr />
@@ -119,10 +120,14 @@
 					<hr />
 					<div class="row" id="socials" style="max-height: 232px">
 						<div
-							class="col-lg-3 col-md-4 col-sm-6 col-xs-12"
+							class="col-md-3 col-xs-6 col-4"
 							v-for="social in homePage.socials"
 							:key="social"
-							style="height: 110px !important"
+							style="
+								height: 110px !important;
+								display: flex;
+								justify-content: center;
+							"
 						>
 							<Icon
 								:link="social.link"
@@ -136,12 +141,94 @@
 			</template>
 		</SkewBox>
 
-        <Footer />
+		<VerticalSkewBox
+			:leftBG="{
+				transform: 'rotate(90deg) scaleY(-1)',
+			}"
+			:leftColor="'transparent;'"
+			:rightColor="'var(--grayBG); border-left: 5px solid var(--red); color: white;'"
+			:height="windowWidth"
+			:padding="'0'"
+			:maintainSkewbox="true"
+			:pictureSide="'left'"
+			:invert="false"
+			style="transform: rotate(90deg) scaleY(-1)"
+			:key="windowWidth"
+			:matrix="true"
+		>
+			<template v-slot:left>
+				<div
+					style="
+						transform: rotate(90deg) scaleY(-1);
+						color: white !important;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+					"
+				>
+					<!-- Round self portait -->
+					<img
+						:src="homePage.pfp"
+						alt="Self Portait"
+						class="img-fluid rounded-circle profilePic"
+						:width="imgHeight"
+					/>
+					<br />
+					<h1>Ibraheem Cazalas</h1>
+                    <br />
+					<h5>Full Stack & Software Developer</h5>
+                    <br />
+					<h5>Computer Science Major</h5>
+					<h5>at Florida Southern College</h5>
+				</div>
+			</template>
+			<template v-slot:right>
+				<div
+					style="
+						transform: rotate(90deg) scaleY(-1);
+						padding-top: 3rem;
+					"
+				>
+					<!-- Description -->
+					<h3 class="header">About Me</h3>
+					<hr />
+					<p>
+						{{ homePage.description }}
+					</p>
+					<br />
+
+					<!-- Socials -->
+					<h3 class="header">Socials</h3>
+					<hr />
+					<div class="row" id="socials" style="max-height: 232px">
+						<div
+							class="col-md-3 col-xs-6 col-4"
+							v-for="social in homePage.socials"
+							:key="social"
+							style="
+								height: 110px !important;
+								display: flex;
+								justify-content: center;
+							"
+						>
+							<Icon
+								:link="social.link"
+								:target="social.target"
+								:icon="social.icon"
+								:copy="social.copy"
+							/>
+						</div>
+					</div>
+				</div>
+			</template>
+		</VerticalSkewBox>
+		<!-- <Footer /> -->
 	</div>
 </template>
 
 <script>
 import SkewBox from "@/components/SkewBox.vue";
+import VerticalSkewBox from "@/components/VerticalSkewBox.vue";
 import Footer from "../components/Footer.vue";
 import Matrix from "../components/Matrix.vue";
 import Icon from "../components/Icon.vue";
@@ -153,6 +240,7 @@ export default {
 		Matrix,
 		Icon,
 		SkewBox,
+		VerticalSkewBox,
 	},
 	data() {
 		return {
@@ -254,8 +342,24 @@ export default {
 #socials {
 	padding-top: 10px;
 	color: white !important;
+	max-height: 232px;
 }
 #socials a {
 	color: white !important;
+}
+
+@media (max-width: 1199.9px) {
+	#socials {
+		max-height: 330px !important;
+	}
+}
+
+@media (max-width: 324.9px) {
+	#socials {
+		max-height: 440px !important;
+	}
+	.col-xs-6 {
+		width: 50% !important;
+	}
 }
 </style>

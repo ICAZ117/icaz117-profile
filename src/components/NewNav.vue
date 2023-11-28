@@ -297,4 +297,18 @@ nav,
 		);
 	}
 }
+
+@media (max-width: 491.98px) {
+    .navbar-brand {
+        width: 72% !important;
+    }
+
+    .navbar-brand img {
+        width: 100% !important;
+    }
+
+    nav, .navbar, .navbar-dark, .navbar-expand-xl {
+        padding: 0!important;
+    }
+}
 </style>

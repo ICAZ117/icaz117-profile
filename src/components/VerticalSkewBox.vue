@@ -176,7 +176,7 @@ export default {
 .poly--holder {
 	overflow: hidden !important;
 	height: var(--propHeight) !important;
-	/* transform: translateY(calc(-1 * var(--propHeight))); */
+	transform: translateY(calc(-1 * var(--propHeight)));
 	--left: calc(-1% * (100 - v-bind(divisionPosition)));
 	--right: calc(1% * v-bind(divisionPosition));
 	--leftWidth: calc(1vw * (v-bind(divisionPosition) - 10));
@@ -189,7 +189,7 @@ export default {
 	transform: skewX(-10deg) translateX(10px);
 	-moz-transform: skewX(-10deg);
 	-webkit-transform: skewX(-10deg);
-	width: calc(100vw - 5px) !important;
+	width: calc(200vh + var(--navbar-height)) !important;
 	height: var(--propHeight) !important;
 	padding: v-bind(padding);
 	z-index: 50;
@@ -231,9 +231,15 @@ export default {
 }
 
 .poly-left {
-	width: var(--leftWidth) !important;
+	width: max(var(--leftWidth), 400px) !important;
 	float: right;
 	margin-right: calc(v-bind(x));
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .poly-right {
@@ -252,57 +258,5 @@ export default {
 ██  ██  ██ ██      ██   ██ ██ ██   ██     ██ ▄▄ ██ ██    ██ ██      ██   ██ ██ ██           ██ 
 ██      ██ ███████ ██████  ██ ██   ██      ██████   ██████  ███████ ██   ██ ██ ███████ ███████ 
 */
-@media (max-width: 1199.9px) {
-	.skewbox-parent {
-		--propHeight: calc((0.7 * v-bind(cssHeight)) + 1px);
-	}
 
-	.poly-content {
-		padding: 0;
-	}
-
-	.poly-right {
-		padding-right: 1rem;
-	}
-
-	.poly-left {
-		padding-left: 1rem;
-	}
-}
-
-@media (max-width: 767.9px) {
-	.skewbox-parent {
-		--propHeight: calc(0.6999 * v-bind(cssHeight));
-	}
-
-	.poly-content {
-		padding: 0;
-	}
-
-	.poly-right {
-		transform: skew(10deg) translateX(-20px);
-	}
-
-	.poly-left {
-		transform: skew(10deg) translateX(20px);
-	}
-
-	.content {
-		padding: 0 !important;
-	}
-}
-
-@media (max-width: 575.9px) {
-	.skewbox-parent {
-		--propHeight: calc(0.5999 * v-bind(cssHeight));
-	}
-
-	.poly-right {
-		transform: skew(10deg) translateX(-35px);
-	}
-
-	.poly-left {
-		transform: skew(10deg) translateX(35px);
-	}
-}
 </style>
