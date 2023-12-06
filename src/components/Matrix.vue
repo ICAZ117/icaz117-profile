@@ -3,22 +3,34 @@
 </template>
 
 <script>
-	export default {
-        props: {
-            width: {
-                type: Number,
-                default: window.innerWidth,
-            },
-            height: {
-                type: Number,
-                default: window.innerHeight,
-            },
-        },
-		mounted() {
-			// MATRIX BACKGROUND ON HOME PAGE
-			// NOTE: This is NOT my code. I copied it from here: https://codepen.io/wefiy/pen/WPpEwo
-			// -------------------------------------------------------------------------------------
-			// geting canvas by Boujjou Achraf
+export default {
+	props: {
+		width: {
+			type: Number,
+			default: window.innerWidth,
+		},
+		height: {
+			type: Number,
+			default: window.innerHeight,
+		},
+	},
+	watch: {
+		width: function (newVal, oldVal) {
+			this.drawMatrix();
+		},
+		height: function (newVal, oldVal) {
+			this.drawMatrix();
+		},
+	},
+    data() {
+        return {
+            intervalRef: {},
+        }
+    },
+	methods: {
+		drawMatrix() {
+            clearInterval(this.intervalRef);
+
 			var c = document.getElementById("c");
 			var ctx = c.getContext("2d");
 
@@ -52,22 +64,31 @@
 				//looping over drops
 				for (var i = 0; i < drops.length; i++) {
 					//a random chinese character to print
-					var text = matrix[Math.floor(Math.random() * matrix.length)];
+					var text =
+						matrix[Math.floor(Math.random() * matrix.length)];
 					//x = i*font_size, y = value of drops[i]*font_size
 					ctx.fillText(text, i * font_size, drops[i] * font_size);
 
 					//sending the drop back to the top randomly after it has crossed the screen
 					//adding a randomness to the reset to make the drops scattered on the Y axis
-					if (drops[i] * font_size > c.height && Math.random() > 0.975) drops[i] = 0;
+					if (
+						drops[i] * font_size > c.height &&
+						Math.random() > 0.975
+					)
+						drops[i] = 0;
 
 					//incrementing Y coordinate
 					drops[i]++;
 				}
 			}
 
-			setInterval(draw, 50);
+			this.intervalRef = setInterval(draw, 50);
 		},
-	};
+	},
+	mounted() {
+		this.drawMatrix();
+	},
+};
 </script>
 
 <style></style>

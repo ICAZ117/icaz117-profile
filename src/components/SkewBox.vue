@@ -176,7 +176,7 @@ export default {
 .poly--holder {
 	overflow: hidden !important;
 	height: var(--propHeight) !important;
-	/* transform: translateY(calc(-1 * var(--propHeight))); */
+	transform: translateY(calc(-1 * var(--propHeight)));
 	--left: calc(-1% * (100 - v-bind(divisionPosition)));
 	--right: calc(1% * v-bind(divisionPosition));
 	--leftWidth: calc(1vw * (v-bind(divisionPosition) - 10));

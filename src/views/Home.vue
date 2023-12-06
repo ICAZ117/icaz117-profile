@@ -76,7 +76,7 @@
 			style="transform: scaleY(-1)"
 			:key="windowHeight"
 			:matrix="true"
-			v-if="false"
+			v-if="windowWidth >= 1200"
 		>
 			<template v-slot:left>
 				<div
@@ -141,29 +141,26 @@
 			</template>
 		</SkewBox>
 
-		<VerticalSkewBox
-			:leftBG="{
-				transform: 'rotate(90deg) scaleY(-1)',
-			}"
-			:leftColor="'transparent;'"
-			:rightColor="'var(--grayBG); border-left: 5px solid var(--red); color: white;'"
-			:height="windowWidth"
-			:padding="'0'"
-			:maintainSkewbox="true"
-			:pictureSide="'left'"
-			:invert="false"
-			style="transform: rotate(90deg) scaleY(-1)"
-			:key="windowWidth"
-			:matrix="true"
-		>
-			<template v-slot:left>
+		<div v-else>
+			<div style="position: fixed; height: 700px; width: 100vw">
+				<div style="z-index: -10">
+					<Matrix
+						:height="windowHeight - 10"
+						:width="windowWidth - 5"
+					/>
+				</div>
 				<div
 					style="
-						transform: rotate(90deg) scaleY(-1);
 						color: white !important;
 						display: flex;
 						flex-direction: column;
 						align-items: center;
+						position: absolute;
+						left: 50%;
+						transform: translateX(-50%);
+						top: 0;
+						width: calc(80vw - 5px);
+						text-align: center;
 					"
 				>
 					<!-- Round self portait -->
@@ -175,53 +172,79 @@
 					/>
 					<br />
 					<h1>Ibraheem Cazalas</h1>
-                    <br />
+					<br />
 					<h5>Full Stack & Software Developer</h5>
-                    <br />
+					<br />
 					<h5>Computer Science Major</h5>
 					<h5>at Florida Southern College</h5>
 				</div>
-			</template>
-			<template v-slot:right>
-				<div
-					style="
-						transform: rotate(90deg) scaleY(-1);
-						padding-top: 3rem;
-					"
-				>
-					<!-- Description -->
-					<h3 class="header">About Me</h3>
-					<hr />
-					<p>
-						{{ homePage.description }}
-					</p>
-					<br />
+			</div>
+			<VerticalSkewBox
+				:leftBG="{
+					transform: 'rotate(90deg) scaleY(-1)',
+				}"
+				:leftColor="'transparent;'"
+				:rightColor="'var(--grayBG); border-left: 5px solid var(--red); color: white;'"
+				:height="windowWidth"
+				:padding="'0'"
+				:maintainSkewbox="true"
+				:pictureSide="'left'"
+				:invert="false"
+				style="transform: rotate(90deg) scaleY(-1)"
+				:key="windowWidth"
+				:matrix="false"
+			>
+				<template v-slot:left> </template>
+				<template v-slot:right>
+					<div
+						style="
+							transform: rotate(90deg) scaleY(-1);
+							padding-top: 10rem;
+							background-color: var(--grayBG);
+							height: 1000px !important;
+						"
+                        class="poly-right-content"
+					>
+						<div>
+							<!-- Description -->
+							<h3 class="header">About Me</h3>
+							<hr />
+							<p>
+								{{ homePage.description }}
+							</p>
+							<br />
 
-					<!-- Socials -->
-					<h3 class="header">Socials</h3>
-					<hr />
-					<div class="row" id="socials" style="max-height: 232px">
-						<div
-							class="col-md-3 col-xs-6 col-4"
-							v-for="social in homePage.socials"
-							:key="social"
-							style="
-								height: 110px !important;
-								display: flex;
-								justify-content: center;
-							"
-						>
-							<Icon
-								:link="social.link"
-								:target="social.target"
-								:icon="social.icon"
-								:copy="social.copy"
-							/>
+							<!-- Socials -->
+							<h3 class="header">Socials</h3>
+							<hr />
+							<div
+								class="row"
+								id="socials"
+								style="max-height: 232px"
+							>
+								<div
+									class="col-md-3 col-xs-6 col-4"
+									v-for="social in homePage.socials"
+									:key="social"
+									style="
+										height: 110px !important;
+										display: flex;
+										justify-content: center;
+									"
+								>
+									<Icon
+										:link="social.link"
+										:target="social.target"
+										:icon="social.icon"
+										:copy="social.copy"
+									/>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</template>
-		</VerticalSkewBox>
+				</template>
+			</VerticalSkewBox>
+		</div>
 		<!-- <Footer /> -->
 	</div>
 </template>
@@ -257,6 +280,7 @@ export default {
 		getWindowSize() {
 			this.windowHeight = window.innerHeight;
 			this.windowWidth = window.innerWidth;
+			console.log("windowHeight", this.windowHeight);
 		},
 	},
 	computed: {
@@ -348,10 +372,20 @@ export default {
 	color: white !important;
 }
 
+.poly-right-content {
+    width: 50vw;
+}
+
 @media (max-width: 1199.9px) {
 	#socials {
 		max-height: 330px !important;
 	}
+}
+
+@media (max-width: 767.9px) {
+    .poly-right-content {
+        width: 75vw;
+    }
 }
 
 @media (max-width: 324.9px) {
@@ -361,5 +395,8 @@ export default {
 	.col-xs-6 {
 		width: 50% !important;
 	}
+    .poly-right-content {
+        width: 90vw;
+    }
 }
 </style>

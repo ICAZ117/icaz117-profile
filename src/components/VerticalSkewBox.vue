@@ -2,11 +2,12 @@
 	<div class="skewbox-parent" v-if="maintainSkewbox || windowWidth >= 1200">
 		<div class="bgs">
 			<div class="bg" :style="leftBG">
-                <div v-if="matrix">
-                    <div class="background">
-						<Matrix :height="height" :width="5140"/>
+				<div v-if="matrix">
+					<div class="background">
+						<Matrix :height="height" :width="5140" />
 					</div>
-                </div></div>
+				</div>
+			</div>
 			<div class="bg" :style="rightBG" style="right: 0 !important"></div>
 		</div>
 		<div class="poly--holder">
@@ -15,7 +16,7 @@
 					<slot name="left"></slot>
 				</div>
 			</div>
-			<div class="poly-item" :style="'background: ' + rightColor">
+			<div class="poly-item" :style="'background: ' + rightColor" style="overflow: hidden;">
 				<div class="poly-content poly-right">
 					<slot name="right"></slot>
 				</div>
@@ -52,7 +53,7 @@
 </template>
 
 <script>
-import Matrix from './Matrix.vue';
+import Matrix from "./Matrix.vue";
 export default {
 	props: {
 		leftColor: {
@@ -115,7 +116,7 @@ export default {
 			default: false,
 			required: false,
 		},
-        matrix: {
+		matrix: {
 			type: Boolean,
 			default: false,
 			required: false,
@@ -126,9 +127,9 @@ export default {
 			required: false,
 		},
 	},
-    components: {
-        Matrix
-    },
+	components: {
+		Matrix,
+	},
 	data() {
 		return {
 			x: 0,
@@ -170,11 +171,11 @@ export default {
 .skewbox-parent {
 	--propHeight: v-bind(cssHeight);
 	height: var(--propHeight);
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .poly--holder {
-	overflow: hidden !important;
+	/* overflow: hidden !important; */
 	height: var(--propHeight) !important;
 	transform: translateY(calc(-1 * var(--propHeight)));
 	--left: calc(-1% * (100 - v-bind(divisionPosition)));
@@ -226,7 +227,6 @@ export default {
 	transform: skewX(10deg);
 	padding: 1rem;
 	margin-left: 2rem;
-	overflow: hidden;
 	height: 100%;
 }
 
@@ -234,17 +234,23 @@ export default {
 	width: max(var(--leftWidth), 400px) !important;
 	float: right;
 	margin-right: calc(v-bind(x));
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+	flex-wrap: wrap;
 }
 
 .poly-right {
 	width: var(--rightWidth) !important;
 	margin-left: calc(v-bind(x));
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    padding-left: calc(v-bind(x) + 7rem);
+    align-content: center;
+    flex-direction: column;
 }
 
 .row.poly--holder {
@@ -258,5 +264,15 @@ export default {
 ██  ██  ██ ██      ██   ██ ██ ██   ██     ██ ▄▄ ██ ██    ██ ██      ██   ██ ██ ██           ██ 
 ██      ██ ███████ ██████  ██ ██   ██      ██████   ██████  ███████ ██   ██ ██ ███████ ███████ 
 */
+@media (max-width: 767.9px) {
+    .poly-right {
+        padding-left: calc(v-bind(x) + 15rem);
+    }
+}
 
+@media (max-width: 324.9px) {
+    .poly-right {
+        padding-left: calc(v-bind(x) + 20rem);
+    }
+}
 </style>
