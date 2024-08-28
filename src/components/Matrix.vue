@@ -16,9 +16,11 @@ export default {
 	},
 	watch: {
 		width: function (newVal, oldVal) {
+            if (newVal === oldVal) return;
 			this.drawMatrix();
 		},
 		height: function (newVal, oldVal) {
+            if (newVal === oldVal) return;
 			this.drawMatrix();
 		},
 	},

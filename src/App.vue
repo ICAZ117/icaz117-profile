@@ -1,7 +1,7 @@
 <template>
 	<NewNav />
 
-	<div class="applicationDisplay dark-scroll-bar">
+	<div class="applicationDisplay dark-scroll-bar" id="applicationDisplay">
 		<router-view />
 	</div>
 	<notifications position="bottom right" />
@@ -59,6 +59,7 @@ body {
 	background-color: var(--grayBG);
 	width: 100vw !important;
 	overflow: hidden !important;
+    min-height: 100%;
 }
 
 .header {
@@ -71,7 +72,7 @@ body {
 	top: 0;
 	height: 100vh;
 	width: 100vw;
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
 	overflow-x: hidden;
 }
 

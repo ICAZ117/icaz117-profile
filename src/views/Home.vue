@@ -1,66 +1,4 @@
 <template>
-	<div class="" v-if="false">
-		<!-- Matrix BG -->
-		<div class="background">
-			<Matrix :height="1000" />
-		</div>
-
-		<div class="row">
-			<!-- LEFT COLUMN -->
-			<div id="leftCol" class="col-7">
-				<!-- Round self portait -->
-				<img
-					:src="homePage.pfp"
-					alt="Self Portait"
-					class="img-fluid rounded-circle profilePic"
-					:width="imgHeight"
-				/>
-				<br />
-				<br />
-				<h1>Ibraheem Cazalas</h1>
-				<br />
-				<h5>Full Stack & Software Developer</h5>
-				<br />
-				<h5>Computer Science Major</h5>
-				<h5>at Florida Southern College</h5>
-			</div>
-
-			<!-- RIGHT COLUMN -->
-			<div id="rightCol" class="col-5">
-				<!-- Description -->
-				<h3 class="header">About Me</h3>
-				<hr />
-				<p>
-					{{ homePage.description }}
-				</p>
-				<br />
-
-				<!-- Socials -->
-				<h3 class="header">Socials</h3>
-				<hr />
-				<div class="row" id="socials">
-					<div
-						class="col-lg-3 col-md-4 col-sm-6 col-xs-12"
-						v-for="social in homePage.socials"
-						:key="social"
-						style="height: 110px !important"
-					>
-						<Icon
-							:link="social.link"
-							:target="social.target"
-							:icon="social.icon"
-							:copy="social.copy"
-						/>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- DIAGONAL DIVIDER -->
-		<div id="middleCol" class="col-1"></div>
-
-		<Footer />
-	</div>
 	<div class="">
 		<SkewBox
 			:leftBG="{
@@ -101,8 +39,8 @@
 					<br />
 					<h5>Full Stack & Software Developer</h5>
 					<br />
-					<h5>Computer Science Major</h5>
-					<h5>at Florida Southern College</h5>
+					<h5>Junior Data Scientist</h5>
+					<h5>at Lakeland Regional Health</h5>
 				</div>
 			</template>
 			<template v-slot:right>
@@ -142,110 +80,75 @@
 		</SkewBox>
 
 		<div v-else>
-			<div style="position: fixed; height: 700px; width: 100vw">
-				<div style="z-index: -10">
-					<Matrix
-						:height="windowHeight - 10"
-						:width="windowWidth - 5"
-					/>
-				</div>
-				<div
-					style="
-						color: white !important;
-						display: flex;
-						flex-direction: column;
-						align-items: center;
-						position: absolute;
-						left: 50%;
-						transform: translateX(-50%);
-						top: 0;
-						width: calc(80vw - 5px);
-						text-align: center;
-					"
-				>
-					<!-- Round self portait -->
-					<img
-						:src="homePage.pfp"
-						alt="Self Portait"
-						class="img-fluid rounded-circle profilePic"
-						:width="imgHeight"
-					/>
-					<br />
-					<h1>Ibraheem Cazalas</h1>
-					<br />
-					<h5>Full Stack & Software Developer</h5>
-					<br />
-					<h5>Computer Science Major</h5>
-					<h5>at Florida Southern College</h5>
-				</div>
-			</div>
 			<VerticalSkewBox
-				:leftBG="{
-					transform: 'rotate(90deg) scaleY(-1)',
-				}"
-				:leftColor="'transparent;'"
-				:rightColor="'var(--grayBG); border-left: 5px solid var(--red); color: white;'"
-				:height="windowWidth"
-				:padding="'0'"
-				:maintainSkewbox="true"
-				:pictureSide="'left'"
-				:invert="false"
-				style="transform: rotate(90deg) scaleY(-1)"
-				:key="windowWidth"
-				:matrix="false"
+				:height="windowHeight"
+				:width="windowWidth"
+				:bottomColor="'var(--grayBG)'"
 			>
-				<template v-slot:left> </template>
-				<template v-slot:right>
+				<template v-slot:top>
 					<div
 						style="
-							transform: rotate(90deg) scaleY(-1);
-							padding-top: 10rem;
-							background-color: var(--grayBG);
-							height: 1000px !important;
+							color: white !important;
+							display: flex;
+							flex-direction: column;
+							align-items: center;
+							width: calc(80vw - 5px);
+							text-align: center;
+							margin: auto;
 						"
-                        class="poly-right-content"
 					>
-						<div>
-							<!-- Description -->
-							<h3 class="header">About Me</h3>
-							<hr />
-							<p>
-								{{ homePage.description }}
-							</p>
-							<br />
+						<!-- Round self portait -->
+						<img
+							:src="homePage.pfp"
+							alt="Self Portait"
+							class="img-fluid rounded-circle profilePic"
+							:width="imgHeight"
+						/>
+						<br />
+						<h1>Ibraheem Cazalas</h1>
+						<br />
+						<h5>Full Stack & Software Developer</h5>
+						<br />
+						<h5>Junior Data Scientist</h5>
+						<h5>at Lakeland Regional Health</h5>
+					</div>
+				</template>
+				<template v-slot:bottom>
+					<!-- Description -->
+					<h3 class="header">About Me</h3>
+					<hr />
+					<p class="white">
+						{{ homePage.description }}
+					</p>
+					<br />
 
-							<!-- Socials -->
-							<h3 class="header">Socials</h3>
-							<hr />
-							<div
-								class="row"
-								id="socials"
-								style="max-height: 232px"
-							>
-								<div
-									class="col-md-3 col-xs-6 col-4"
-									v-for="social in homePage.socials"
-									:key="social"
-									style="
-										height: 110px !important;
-										display: flex;
-										justify-content: center;
-									"
-								>
-									<Icon
-										:link="social.link"
-										:target="social.target"
-										:icon="social.icon"
-										:copy="social.copy"
-									/>
-								</div>
-							</div>
+					<!-- Socials -->
+					<h3 class="header">Socials</h3>
+					<hr />
+					<div class="row" id="socials" style="max-height: 232px">
+						<div
+							class="col-md-3 col-xs-6 col-4"
+							v-for="social in homePage.socials"
+							:key="social"
+							style="
+								height: 110px !important;
+								display: flex;
+								justify-content: center;
+							"
+						>
+							<Icon
+								:link="social.link"
+								:target="social.target"
+								:icon="social.icon"
+								:copy="social.copy"
+							/>
 						</div>
 					</div>
+					<!-- <Footer style="transform: rotate(90deg) scaleY(-1);" /> -->
 				</template>
 			</VerticalSkewBox>
 		</div>
-		<!-- <Footer /> -->
+		<Footer />
 	</div>
 </template>
 
@@ -281,6 +184,25 @@ export default {
 			this.windowHeight = window.innerHeight;
 			this.windowWidth = window.innerWidth;
 			console.log("windowHeight", this.windowHeight);
+			console.log("windowWidth", this.windowWidth);
+		},
+		getBottomOfRect() {
+			const div = document.getElementById("bottomHalf");
+			const bottomHalfRect = div.getBoundingClientRect();
+			const bodyRect = document.body.getBoundingClientRect();
+
+			// console.log("BOTTOM RECT", window.pageYOffset);
+			const applicationDisplay =
+				document.getElementById("applicationDisplay");
+			console.log("APPLICATION DISPLAY", applicationDisplay.scrollTop);
+			console.log(
+				"APPLICATION DISPLAY",
+				applicationDisplay.getBoundingClientRect()
+			);
+			console.log(
+				"position",
+				bottomHalfRect.bottom + applicationDisplay.scrollTop
+			);
 		},
 	},
 	computed: {
@@ -373,7 +295,7 @@ export default {
 }
 
 .poly-right-content {
-    width: 50vw;
+	width: 50vw;
 }
 
 @media (max-width: 1199.9px) {
@@ -383,9 +305,9 @@ export default {
 }
 
 @media (max-width: 767.9px) {
-    .poly-right-content {
-        width: 75vw;
-    }
+	.poly-right-content {
+		width: 75vw;
+	}
 }
 
 @media (max-width: 324.9px) {
@@ -395,8 +317,8 @@ export default {
 	.col-xs-6 {
 		width: 50% !important;
 	}
-    .poly-right-content {
-        width: 90vw;
-    }
+	.poly-right-content {
+		width: 90vw;
+	}
 }
 </style>

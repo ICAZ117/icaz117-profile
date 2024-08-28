@@ -45,12 +45,20 @@
 				<div class="col-6">
 					<h3 class="header">‎</h3>
 					<br />
-					<!-- SIGCSE Image -->
-					<div v-if="true" id="csImage">
+					<div v-if="project.photo" id="csImage">
 						<img
 							:src="require('../assets/' + project.photo)"
 							alt="Photo"
 							:height="heights[i]"
+                            style="max-width: 100%; object-fit: contain; margin: auto; display: block;"
+						/>
+					</div>
+                    <div v-if="project.photoURL" id="csImage">
+						<img
+							:src="project.photoURL"
+							alt="Photo"
+							:height="heights[i]"
+                            @click="openImage(project.photoURL)"
                             style="max-width: 100%; object-fit: contain; margin: auto; display: block;"
 						/>
 					</div>
@@ -81,6 +89,9 @@
 					this.heights.push(document.getElementById(i).offsetHeight - 150);
 				}
 			},
+            openImage(url) {
+                window.open(url, "_blank");
+            }
 		},
 		computed: {
 			projectPage() {

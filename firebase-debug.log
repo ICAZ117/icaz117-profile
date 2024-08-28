@@ -1,0 +1,114 @@
+[debug] [2024-05-22T16:51:10.766Z] ----------------------------------------------------------------------
+[debug] [2024-05-22T16:51:10.768Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\ibrah\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-05-22T16:51:10.768Z] CLI Version:   13.7.2
+[debug] [2024-05-22T16:51:10.769Z] Platform:      win32
+[debug] [2024-05-22T16:51:10.769Z] Node Version:  v18.12.1
+[debug] [2024-05-22T16:51:10.770Z] Time:          Wed May 22 2024 12:51:10 GMT-0400 (Eastern Daylight Time)
+[debug] [2024-05-22T16:51:10.770Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-05-22T16:51:10.845Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-05-22T16:51:10.845Z] > authorizing via signed-in user (ibraheemcazalas@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\OneDrive\Documents\Code\Vue\oldportfolioupdate
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-05-22T16:51:30.726Z] Using project from CLI flag: icaz117
+[debug] [2024-05-22T16:51:30.729Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/icaz117 [none]
+[debug] [2024-05-22T16:51:31.253Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/icaz117 200
+[debug] [2024-05-22T16:51:31.254Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/icaz117 {"projectId":"icaz117","projectNumber":"459005865141","displayName":"ICAZ117","name":"projects/icaz117","resources":{"hostingSite":"icaz117","storageBucket":"icaz117.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_71b2f0e5-f8d7-4c64-b0cd-bd4d872acc6c"}
+[info] i  Using project icaz117 (ICAZ117) 
+[info] 
+=== Firestore Setup
+[debug] [2024-05-22T16:51:31.288Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/icaz117/services/firestore.googleapis.com [none]
+[debug] [2024-05-22T16:51:31.288Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/icaz117/services/firestore.googleapis.com x-goog-quota-user=projects/icaz117
+[debug] [2024-05-22T16:51:32.017Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/icaz117/services/firestore.googleapis.com 200
+[debug] [2024-05-22T16:51:32.017Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/icaz117/services/firestore.googleapis.com [omitted]
+[debug] [2024-05-22T16:51:32.018Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default) [none]
+[debug] [2024-05-22T16:51:32.664Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default) 200
+[debug] [2024-05-22T16:51:32.664Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default) {"name":"projects/icaz117/databases/(default)","uid":"b48dc5ed-aae2-47d6-b772-af7a9ac3ef83","createTime":"2022-04-28T21:56:19.658326Z","updateTime":"2022-04-28T21:56:19.658326Z","locationId":"nam5","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2024-05-22T15:50:58.514801Z","appEngineIntegrationMode":"ENABLED","keyPrefix":"s","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","etag":"IIez/+jboYYDMNay94vgmoUD"}
+[debug] [2024-05-22T16:51:32.665Z] database_type: FIRESTORE_NATIVE
+[debug] [2024-05-22T16:51:32.665Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-05-22T16:51:32.665Z] > authorizing via signed-in user (ibraheemcazalas@gmail.com)
+[debug] [2024-05-22T16:51:32.665Z] [iam] checking project icaz117 for permissions ["firebase.projects.get"]
+[debug] [2024-05-22T16:51:32.666Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/icaz117:testIamPermissions [none]
+[debug] [2024-05-22T16:51:32.666Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/icaz117:testIamPermissions x-goog-quota-user=projects/icaz117
+[debug] [2024-05-22T16:51:32.666Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/icaz117:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-05-22T16:51:33.166Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/icaz117:testIamPermissions 200
+[debug] [2024-05-22T16:51:33.166Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/icaz117:testIamPermissions {"permissions":["firebase.projects.get"]}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2024-05-22T16:51:35.812Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/icaz117/releases pageSize=10&pageToken=
+[debug] [2024-05-22T16:51:36.466Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/icaz117/releases 200
+[debug] [2024-05-22T16:51:36.467Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/icaz117/releases {"releases":[{"name":"projects/icaz117/releases/cloud.firestore","rulesetName":"projects/icaz117/rulesets/1458f059-6217-458b-8cff-59dc59b1b23b","createTime":"2022-04-28T21:56:31.957010Z","updateTime":"2022-05-26T20:04:01.158060Z"},{"name":"projects/icaz117/releases/firebase.storage/icaz117.appspot.com","rulesetName":"projects/icaz117/rulesets/2e1a1220-3c2f-43f4-821b-82355e558f59","createTime":"2023-09-30T03:26:57.961204Z","updateTime":"2023-09-30T03:26:57.961204Z"}]}
+[debug] [2024-05-22T16:51:36.480Z] Found ruleset: projects/icaz117/rulesets/1458f059-6217-458b-8cff-59dc59b1b23b
+[debug] [2024-05-22T16:51:36.481Z] >>> [apiv2][query] GET https://firebaserules.googleapis.com/v1/projects/icaz117/rulesets/1458f059-6217-458b-8cff-59dc59b1b23b [none]
+[debug] [2024-05-22T16:51:36.862Z] <<< [apiv2][status] GET https://firebaserules.googleapis.com/v1/projects/icaz117/rulesets/1458f059-6217-458b-8cff-59dc59b1b23b 200
+[debug] [2024-05-22T16:51:36.862Z] <<< [apiv2][body] GET https://firebaserules.googleapis.com/v1/projects/icaz117/rulesets/1458f059-6217-458b-8cff-59dc59b1b23b [omitted]
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2024-05-22T16:51:39.551Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default)/collectionGroups/-/indexes [none]
+[debug] [2024-05-22T16:51:39.554Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* [none]
+[debug] [2024-05-22T16:51:40.155Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* 200
+[debug] [2024-05-22T16:51:40.155Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false OR ttlConfig:* {"fields":[{"name":"projects/icaz117/databases/(default)/collectionGroups/__default__/fields/*","indexConfig":{"indexes":[{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"ASCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","order":"DESCENDING"}],"state":"READY"},{"queryScope":"COLLECTION","fields":[{"fieldPath":"*","arrayConfig":"CONTAINS"}],"state":"READY"}]}}]}
+[debug] [2024-05-22T16:51:40.158Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default)/collectionGroups/-/indexes 200
+[debug] [2024-05-22T16:51:40.158Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/icaz117/databases/(default)/collectionGroups/-/indexes {}
+[info] 
+=== Hosting Setup
+[debug] [2024-05-22T16:51:40.163Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/icaz117 [none]
+[debug] [2024-05-22T16:51:40.646Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/icaz117 200
+[debug] [2024-05-22T16:51:40.646Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/icaz117 {"projectId":"icaz117","projectNumber":"459005865141","displayName":"ICAZ117","name":"projects/icaz117","resources":{"hostingSite":"icaz117","storageBucket":"icaz117.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_71b2f0e5-f8d7-4c64-b0cd-bd4d872acc6c"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2024-05-22T16:51:58.254Z] ----------------------------------------------------------------------
+[debug] [2024-05-22T16:51:58.256Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\ibrah\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-05-22T16:51:58.256Z] CLI Version:   13.7.2
+[debug] [2024-05-22T16:51:58.257Z] Platform:      win32
+[debug] [2024-05-22T16:51:58.257Z] Node Version:  v18.12.1
+[debug] [2024-05-22T16:51:58.258Z] Time:          Wed May 22 2024 12:51:58 GMT-0400 (Eastern Daylight Time)
+[debug] [2024-05-22T16:51:58.258Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-05-22T16:51:58.330Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-05-22T16:51:58.331Z] > authorizing via signed-in user (ibraheemcazalas@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\OneDrive\Documents\Code\Vue\oldportfolioupdate
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+

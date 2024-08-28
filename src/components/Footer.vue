@@ -1,6 +1,7 @@
 <template>
 	<div class="footer">
-		&copy; 2022 - Ibraheem Cazalas
+        <!-- dynamically print year -->
+		&copy; {{ new Date().getFullYear() }} - Ibraheem Cazalas
 		<hr />
 	</div>
 </template>

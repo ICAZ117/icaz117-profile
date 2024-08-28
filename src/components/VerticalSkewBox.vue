@@ -1,52 +1,17 @@
 <template>
-	<div class="skewbox-parent" v-if="maintainSkewbox || windowWidth >= 1200">
-		<div class="bgs">
-			<div class="bg" :style="leftBG">
-				<div v-if="matrix">
-					<div class="background">
-						<Matrix :height="height" :width="5140" />
-					</div>
-				</div>
+	<div class="vsb-parent">
+		<div class="vsb-top" ref="vsbTop">
+			<div style="position: fixed; z-index: -50">
+				<Matrix :height="matrixHeight" :width="width" />
 			</div>
-			<div class="bg" :style="rightBG" style="right: 0 !important"></div>
+			<div>
+				<slot name="top"></slot>
+			</div>
+			<div class="vsb-middle"></div>
 		</div>
-		<div class="poly--holder">
-			<div class="poly-item" :style="'background: ' + leftColor">
-				<div class="poly-content poly-left">
-					<slot name="left"></slot>
-				</div>
-			</div>
-			<div class="poly-item" :style="'background: ' + rightColor" style="overflow: hidden;">
-				<div class="poly-content poly-right">
-					<slot name="right"></slot>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div v-else class="h-100">
-		<div
-			:style="
-				'transform: scaleY(' +
-				(invert ? '-' : '') +
-				'1); background-position: center; background-size: cover; background-image: ' +
-				(pictureSide == 'right'
-					? rightBG.backgroundImage
-					: leftBG.backgroundImage)
-			"
-			style="width: 100% !important; height: 100% !important"
-		>
-			<div
-				:style="
-					'transform: scaleY(' +
-					(invert ? '-' : '') +
-					'1); display: flex; align-items: center; background-color: var(--grayBG); color: white; height: 100%; width: 100%;'
-				"
-			>
-				<div class="container">
-					<slot
-						:name="pictureSide == 'right' ? 'left' : 'right'"
-					></slot>
-				</div>
+		<div class="vsb-bottom">
+			<div class="container">
+				<slot name="bottom"></slot>
 			</div>
 		</div>
 	</div>
@@ -55,224 +20,82 @@
 <script>
 import Matrix from "./Matrix.vue";
 export default {
-	props: {
-		leftColor: {
-			type: String,
-			required: false,
-			default: "var(--FSCred)",
-		},
-		rightColor: {
-			type: String,
-			required: false,
-			default: "var(--FSCblue)",
-		},
-		leftBG: {
-			type: Object,
-			required: false,
-			default: {},
-		},
-		rightBG: {
-			type: Object,
-			required: false,
-			default: {},
-		},
-		divisionPosition: {
-			type: Number,
-			required: false,
-			default: 50,
-		},
-		height: {
-			type: Number,
-			required: false,
-			default: 500,
-		},
-		padding: {
-			type: String,
-			required: false,
-			default: "0 0 0 0",
-		},
-		opacity: {
-			type: Number,
-			default: 0,
-			required: false,
-		},
-		overlayColor: {
-			type: String,
-			default: "0, 0, 0",
-			required: false,
-		},
-		pictureSide: {
-			type: String,
-			default: "right",
-			required: false,
-		},
-		maintainSkewbox: {
-			type: Boolean,
-			default: true,
-			required: false,
-		},
-		invert: {
-			type: Boolean,
-			default: false,
-			required: false,
-		},
-		matrix: {
-			type: Boolean,
-			default: false,
-			required: false,
-		},
-		mobileColor: {
-			type: String,
-			default: "hsla(0, 0%, 0%, 0.6)",
-			required: false,
-		},
-	},
 	components: {
 		Matrix,
 	},
-	data() {
-		return {
-			x: 0,
-			cssHeight: "",
-			windowHeight: "",
-			windowWidth: "",
-		};
-	},
-	methods: {
-		getWindowSize() {
-			this.windowHeight = window.innerHeight;
-			this.windowWidth = window.innerWidth;
+	props: {
+		height: {
+			type: Number,
+			default: 100,
+		},
+		width: {
+			type: Number,
+			default: 500,
+		},
+		bottomColor: {
+			type: String,
+			default: "#005f9f",
 		},
 	},
-	created() {
-		window.addEventListener("resize", this.getWindowSize);
-	},
-	destroyed() {
-		window.removeEventListener("resize", this.getWindowSize);
-	},
-	beforeMount() {
-		this.getWindowSize();
+	data() {
+		return {
+			matrixHeight: 0,
+		};
 	},
 	mounted() {
-		this.x = Math.tan((10 * Math.PI) / 180) * (this.height / 2) + "px";
-		this.cssHeight = this.height + "px";
+		this.$nextTick(() => {
+			this.calculateMatrixHeight();
+		});
+	},
+	updated() {
+		this.$nextTick(() => {
+			this.calculateMatrixHeight();
+		});
+	},
+	methods: {
+		calculateMatrixHeight() {
+			const vsbTopHeight = this.$refs.vsbTop.clientHeight;
+			this.matrixHeight = vsbTopHeight - 1;
+		},
 	},
 };
 </script>
 
-<style scoped>
-/*
-███████ ██   ██ ███████ ██     ██ ██████   ██████  ██   ██ 
-██      ██  ██  ██      ██     ██ ██   ██ ██    ██  ██ ██  
-███████ █████   █████   ██  █  ██ ██████  ██    ██   ███   
-     ██ ██  ██  ██      ██ ███ ██ ██   ██ ██    ██  ██ ██  
-███████ ██   ██ ███████  ███ ███  ██████   ██████  ██   ██ 
-*/
-.skewbox-parent {
-	--propHeight: v-bind(cssHeight);
-	height: var(--propHeight);
-	/* overflow: hidden; */
-}
-
-.poly--holder {
-	/* overflow: hidden !important; */
-	height: var(--propHeight) !important;
-	transform: translateY(calc(-1 * var(--propHeight)));
-	--left: calc(-1% * (100 - v-bind(divisionPosition)));
-	--right: calc(1% * v-bind(divisionPosition));
-	--leftWidth: calc(1vw * (v-bind(divisionPosition) - 10));
-	--rightWidth: calc(1vw * ((100 - v-bind(divisionPosition)) - 10));
-}
-
-.poly--holder .poly-item {
-	box-sizing: border-box;
-	margin: 0;
-	transform: skewX(-10deg) translateX(10px);
-	-moz-transform: skewX(-10deg);
-	-webkit-transform: skewX(-10deg);
-	width: calc(200vh + var(--navbar-height)) !important;
-	height: var(--propHeight) !important;
-	padding: v-bind(padding);
-	z-index: 50;
-}
-
-.poly--holder .poly-item:nth-of-type(1) {
-	margin: 0;
-	transform: translateX(var(--left)) skewX(-10deg);
-}
-
-.poly--holder .poly-item:nth-of-type(2) {
-	margin: 0;
-	transform: translateX(var(--right)) translateY(calc(-1 * var(--propHeight)))
-		skewX(-10deg);
-}
-
-.bgs {
-	z-index: -10 !important;
-	height: var(--propHeight);
-	overflow: hidden;
-}
-.bg {
-	width: 100% !important;
-	height: var(--propHeight);
-	box-shadow: inset 0 0 0 2000px rgba(v-bind(overlayColor), v-bind(opacity));
-}
-
-.bgs .bg:nth-of-type(2) {
-	transform: translateY(calc(-1 * var(--propHeight)));
-	float: right;
-}
-
-.poly-content {
-	transform: skewX(10deg);
-	padding: 1rem;
-	margin-left: 2rem;
-	height: 100%;
-}
-
-.poly-left {
-	width: max(var(--leftWidth), 400px) !important;
-	float: right;
-	margin-right: calc(v-bind(x));
+<style>
+.vsb-parent {
+	--vsb-divider-height: 80px;
+	--vsb-divider-height-num: 80;
 	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-	align-content: center;
 	flex-direction: column;
-	flex-wrap: wrap;
+	width: 100vw;
 }
 
-.poly-right {
-	width: var(--rightWidth) !important;
-	margin-left: calc(v-bind(x));
+.vsb-top {
+	min-height: calc(100px + var(--vsb-divider-height));
 	display: flex;
-	justify-content: center;
-	align-items: center;
-    padding-left: calc(v-bind(x) + 7rem);
-    align-content: center;
-    flex-direction: column;
+	flex-direction: column;
+	height: fit-content;
 }
 
-.row.poly--holder {
-	margin: 0 !important;
+.vsb-middle {
+	min-height: 100px;
+	overflow: auto;
+	background-color: #00000000;
+	background-image: -webkit-linear-gradient(
+		calc(atan(calc(v-bind(width) / var(--vsb-divider-height-num)))),
+		v-bind(bottomColor) 50%,
+		var(--red) 50%,
+		var(--red) 52%,
+		#00000000 52%
+	);
+	margin-top: auto;
+	margin-bottom: -1px;
+	width: 100vw;
 }
 
-/*
-███    ███ ███████ ██████  ██  █████       ██████  ██    ██ ███████ ██████  ██ ███████ ███████ 
-████  ████ ██      ██   ██ ██ ██   ██     ██    ██ ██    ██ ██      ██   ██ ██ ██      ██      
-██ ████ ██ █████   ██   ██ ██ ███████     ██    ██ ██    ██ █████   ██████  ██ █████   ███████ 
-██  ██  ██ ██      ██   ██ ██ ██   ██     ██ ▄▄ ██ ██    ██ ██      ██   ██ ██ ██           ██ 
-██      ██ ███████ ██████  ██ ██   ██      ██████   ██████  ███████ ██   ██ ██ ███████ ███████ 
-*/
-@media (max-width: 767.9px) {
-    .poly-right {
-        padding-left: calc(v-bind(x) + 15rem);
-    }
-}
-
-@media (max-width: 324.9px) {
-    .poly-right {
-        padding-left: calc(v-bind(x) + 20rem);
-    }
+.vsb-bottom {
+	min-height: 100px;
+	background-color: v-bind(bottomColor);
+	padding-top: 5px;
 }
 </style>
