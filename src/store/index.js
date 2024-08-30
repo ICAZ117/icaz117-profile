@@ -29,6 +29,7 @@ const store = createStore({
 			github: "",
 			linkedin: "",
 			email: "",
+            projects: [],
 		},
 		aboutPage: {
 			csContent: "",

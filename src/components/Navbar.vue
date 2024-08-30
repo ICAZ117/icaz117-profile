@@ -16,10 +16,6 @@
 						<router-link to="/about" class="nav-link">About</router-link>
 					</div>
 
-					<div class="nav-item">
-						<router-link to="/projects" class="nav-link">Projects</router-link>
-					</div>
-
                     <div class="nav-item" v-if="!isLoggedIn">
 						<router-link to="/login" class="nav-link">Log In</router-link>
 					</div>

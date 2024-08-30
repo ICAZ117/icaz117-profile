@@ -116,4 +116,8 @@ body {
 .red-button:hover {
 	box-shadow: 0 0 10px var(--red);
 }
+
+.red {
+    color: var(--red);
+}
 </style>

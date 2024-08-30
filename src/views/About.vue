@@ -1,5 +1,7 @@
 <template>
 	<div class="pageContent">
+
+        
 		<!----------------------- CS Content ----------------------->
 		<div class="row">
 			<div class="col-6">
@@ -53,70 +55,70 @@
 </template>
 
 <script>
-	import Footer from "../components/Footer.vue";
+import Footer from "../components/Footer.vue";
 
-	export default {
-		components: {
-			Footer,
+export default {
+	components: {
+		Footer,
+	},
+	data() {
+		return {
+			csContentHeight: 0,
+			medContentHeight: 0,
+		};
+	},
+	computed: {
+		getCSContentHeight() {
+			return document.getElementById("cs-content").offsetHeight;
 		},
-		data() {
-			return {
-				csContentHeight: 0,
-				medContentHeight: 0,
-			};
+		getMedContentHeight() {
+			return document.getElementById("med-content").offsetHeight;
 		},
-		computed: {
-			getCSContentHeight() {
-				return document.getElementById("cs-content").offsetHeight;
-			},
-			getMedContentHeight() {
-				return document.getElementById("med-content").offsetHeight;
-			},
-			aboutPage() {
-				return this.$store.getters.getAboutPage;
-			},
+		aboutPage() {
+			return this.$store.getters.getAboutPage;
 		},
-		async beforeMount() {
-			var self = this;
-			await this.$store.dispatch("fetchAboutPage").then((result) => {
-				self.csContentHeight = self.getCSContentHeight;
-				self.medContentHeight = self.getMedContentHeight;
-			});
-		},
-		mounted() {},
-	};
+	},
+	async beforeMount() {
+		var self = this;
+		await this.$store.dispatch("fetchAboutPage").then((result) => {
+			self.csContentHeight = self.getCSContentHeight;
+			self.medContentHeight = self.getMedContentHeight;
+		});
+	},
+	mounted() {},
+};
 </script>
 
 <style>
-	.pageContent {
-		background-color: var(--grayBG) !important;
-		color: white;
-		padding: 2rem;
-		margin: 0;
-		width: calc(100vw - 5px);
-		height: calc(100vh - var(--navbar-height));
-		text-align: justify;
-	}
+.pageContent {
+	background-color: var(--grayBG) !important;
+	color: white;
+	padding: 2rem;
+	margin: 0;
+	width: calc(100vw - 5px);
+	height: calc(100vh - var(--navbar-height));
+	text-align: justify;
+}
 
-	#csImage {
-		width: 100%;
-		align-content: center;
-	}
+#csImage {
+	width: 100%;
+	align-content: center;
+}
 
-	.csImage {
-		margin: auto;
-		display: block;
+.csImage {
+	margin: auto;
+	display: block;
 
-		/* object-fit: cover; */
-		max-width: 100%;
+	/* object-fit: cover; */
+	max-width: 100%;
 
-		object-fit: cover;
-		border: 5px solid var(--red);
-	}
+	object-fit: cover;
+	border: 5px solid var(--red);
+}
 </style>
 
 <style scoped>
-	.col-6 {
-		overflow: hidden;
-	}
+.col-6 {
+	overflow: hidden;
+}
 </style>
