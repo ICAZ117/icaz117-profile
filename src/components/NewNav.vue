@@ -47,11 +47,11 @@
 							>
 						</div>
 
-						<div class="nav-item">
+						<!-- <div class="nav-item">
 							<router-link to="/about" class="nav-link"
 								>About</router-link
 							>
-						</div>
+						</div> -->
 
 						<div class="nav-item" v-if="!isLoggedIn">
 							<router-link to="/login" class="nav-link"

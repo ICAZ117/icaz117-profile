@@ -12,9 +12,9 @@
 						<router-link to="/" class="nav-link">Home</router-link>
 					</div>
 
-					<div class="nav-item">
+					<!-- <div class="nav-item">
 						<router-link to="/about" class="nav-link">About</router-link>
-					</div>
+					</div> -->
 
                     <div class="nav-item" v-if="!isLoggedIn">
 						<router-link to="/login" class="nav-link">Log In</router-link>
