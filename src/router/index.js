@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import HiLo from "../views/HiLo.vue";
 import Leaderboard from "../views/Leaderboard.vue";
+import OBS from "../views/OBS.vue";
 
 const routes = [
 	{
@@ -38,6 +39,14 @@ const routes = [
 		component: Register,
         meta: {
             title: "Register | ICAZ117"
+        }
+	},
+    {
+		path: "/obs",
+		name: "OBS",
+		component: OBS,
+        meta: {
+            title: "OBS | ICAZ117"
         }
 	},
 	{

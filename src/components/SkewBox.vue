@@ -4,7 +4,7 @@
 			<div class="bg" :style="leftBG">
                 <div v-if="matrix">
                     <div class="background">
-						<Matrix :height="height" :width="5140"/>
+						<Matrix :height="windowHeight" :width="5140"/>
 					</div>
                 </div></div>
 			<div class="bg" :style="rightBG" style="right: 0 !important"></div>

@@ -1,9 +1,12 @@
 <template>
-	<NewNav />
+	<!-- <NewNav /> -->
+    <!-- Only display newnav if the route is NOT /obs -->
+    <NewNav v-if="$route.path !== '/obs'" />
 
-	<div class="applicationDisplay dark-scroll-bar" id="applicationDisplay">
+	<div v-if="$route.path !== '/obs'" class="applicationDisplay dark-scroll-bar" id="applicationDisplay">
 		<router-view />
 	</div>
+    <router-view v-else/>
 	<notifications position="bottom right" />
 </template>
 
