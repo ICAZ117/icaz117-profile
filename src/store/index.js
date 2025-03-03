@@ -30,6 +30,7 @@ const store = createStore({
 			linkedin: "",
 			email: "",
             projects: [],
+            position: {},
 		},
 		aboutPage: {
 			csContent: "",

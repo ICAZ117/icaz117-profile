@@ -1,5 +1,5 @@
 <template>
-	<a v-if="resume" href="/Cazalas_Resume.pdf" class="white" download>
+	<a v-if="resume" class="white" :href="link" target="_blank">
 		<div class="icon" title="Resume">
 			<img src="../assets/Resume.svg" class="resumeIcon" />
 		</div>
@@ -51,6 +51,11 @@ export default {
 				type: "success",
 			});
 		},
+	},
+	mounted() {
+		console.log("\n----- NEW ICON -----");
+		console.log("link:", this.link);
+		console.log("resume:", this.resume);
 	},
 };
 </script>

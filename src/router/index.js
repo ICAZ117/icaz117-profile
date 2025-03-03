@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Home from "../views/Home.vue";
-import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import HiLo from "../views/HiLo.vue";
@@ -15,14 +14,6 @@ const routes = [
 		component: Home,
         meta: {
             title: "Home | ICAZ117"
-        }
-	},
-	{
-		path: "/about",
-		name: "About",
-		component: About,
-        meta: {
-            title: "About | ICAZ117"
         }
 	},
 	{

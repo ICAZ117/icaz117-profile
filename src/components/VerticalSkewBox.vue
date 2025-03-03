@@ -55,7 +55,9 @@ export default {
 	methods: {
 		calculateMatrixHeight() {
 			const vsbTopHeight = this.$refs.vsbTop.clientHeight;
-			this.matrixHeight = vsbTopHeight - 1;
+            console.log("vsbTopHeight", vsbTopHeight);
+            
+			this.matrixHeight = Math.max(1000, vsbTopHeight);
 		},
 	},
 };

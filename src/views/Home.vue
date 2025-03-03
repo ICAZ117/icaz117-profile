@@ -37,10 +37,8 @@
 						<br />
 						<h1>Ibraheem Cazalas</h1>
 						<br />
-						<h5>Full Stack & Software Developer</h5>
-						<br />
-						<h5>Junior Data Scientist</h5>
-						<h5>at Lakeland Regional Health</h5>
+						<h5>{{ homePage.position.role }}</h5>
+						<h5>at {{ homePage.position.company }}</h5>
 					</div>
 				</template>
 				<template v-slot:right>
@@ -83,7 +81,7 @@
 									justify-content: center;
 								"
 							>
-								<Icon :resume="true" />
+								<Icon :resume="true" :link="resume"/>
 							</div>
 						</div>
 					</div>
@@ -130,7 +128,10 @@
 									<h1>{{ project.title }}</h1>
 									<div v-if="project.employer">
                                         <h5>
-										    {{ project.role }} | {{ project.employer }}
+										    {{ project.role }}
+                                        </h5>
+                                        <h5>
+                                            {{ project.employer }}
 									    </h5>
                                         <h5>
                                             {{
@@ -148,19 +149,22 @@
                                     </div>
                                     <div v-else>
                                         <h5>
-										{{ project.role }} |
-										{{
-											timestampToMonthYear(
-												project.startDate
-											)
-										}}
-										-
-										{{
-											timestampToMonthYear(
-												project.endDate
-											)
-										}}
-									</h5>
+										    {{ project.role }}
+                                        </h5>
+                                        <h5>{{ project.employer }}</h5>
+                                        <h5>
+                                            {{
+                                                timestampToMonthYear(
+                                                    project.startDate
+                                                )
+                                            }}
+                                            -
+                                            {{
+                                                timestampToMonthYear(
+                                                    project.endDate
+                                                )
+                                            }}
+									    </h5>
                                     </div>
 									<hr class="w-100" />
 									<ul class="left">
@@ -174,6 +178,7 @@
 
 									<div class="text-center">
 										<a
+                                            v-if="project.link"
 											:href="project.link"
 											class="btn ghrepo"
 											target="_blank"
@@ -239,10 +244,8 @@
 						<br />
 						<h1>Ibraheem Cazalas</h1>
 						<br />
-						<h5>Full Stack & Software Developer</h5>
-						<br />
-						<h5>Junior Data Scientist</h5>
-						<h5>at Lakeland Regional Health</h5>
+						<h5>{{ homePage.position.role }}</h5>
+						<h5>at {{ homePage.position.company }}</h5>
 					</div>
 				</template>
 				<template v-slot:bottom>
@@ -276,15 +279,15 @@
 							/>
 						</div>
                         <div
-								class="col-md-3 col-xs-6 col-4"
-								style="
-									height: 110px !important;
-									display: flex;
-									justify-content: center;
-								"
-							>
-								<Icon :resume="true" />
-							</div>
+                            class="col-md-3 col-xs-6 col-4"
+                            style="
+                                height: 110px !important;
+                                display: flex;
+                                justify-content: center;
+                            "
+                        >
+                            <Icon :resume="true" :link="resume"/>
+                        </div>
 					</div>
 					<div>
 					<h3 class="header pt-3">Projects & Experiences</h3>
@@ -330,10 +333,11 @@
                                         </ul>
                                     </p>
                                     <a
+                                        v-if="project.link"
                                         :href="project.link"
                                         class="btn"
                                         target="_blank"
-                                        >Go to Project</a
+                                        >Github Repository</a
                                     >
                                 </div>
                             </div>
@@ -382,6 +386,7 @@ export default {
 			windowHeight: 0,
 			windowWidth: 0,
 			projects: [],
+			resume: "",
 		};
 	},
 	methods: {
@@ -413,6 +418,10 @@ export default {
 			);
 		},
 		timestampToMonthYear(timestamp) {
+			if (timestamp == "Present") {
+				return "Present";
+			}
+
 			// Create date object
 			const date = new Date(timestamp.seconds * 1000);
 
@@ -438,6 +447,12 @@ export default {
 		this.socials = this.homePage.socials;
 		this.socials.sort((a, b) => a.position - b.position);
 		this.projects = this.homePage.projects;
+		this.resume = this.homePage.resume;
+
+		console.log("\n---------- HOME PAGE BEFORE MOUNT ----------");
+		console.log("HOME PAGE", this.homePage);
+		console.log("HP RESUME", this.homePage.resume);
+		console.log("RESUME", this.resume);
 
 		// Reverse projects so that the most recent project is first
 		this.projects.reverse();
@@ -461,7 +476,7 @@ export default {
 }
 
 .carousel__track {
-    margin-bottom: 0!important;
+	margin-bottom: 0 !important;
 }
 .white {
 	color: white;
