@@ -1,6 +1,7 @@
 {
   "projects": {
-    "icaz117": "icaz117"
+    "icaz117": "icaz117",
+    "default": "icaz117"
   },
   "targets": {}
 }
