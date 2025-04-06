@@ -32,6 +32,7 @@ const store = createStore({
             projects: [],
             position: {},
             resume: "",
+            resumeDocx: "",
 		},
 		aboutPage: {
 			csContent: "",

@@ -49,6 +49,14 @@ const routes = [
             title: "Resume | ICAZ117"
         }
 	},
+    {
+		path: "/resume/docx",
+		name: "Resume Docx",
+		component: Resume,
+        meta: {
+            title: "Resume | ICAZ117"
+        }
+	},
 	{
 		path: "/game",
 		name: "HiLo",
