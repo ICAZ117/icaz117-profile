@@ -53,14 +53,9 @@
 							>
 						</div> -->
 
-						<div class="nav-item" v-if="!isLoggedIn">
-							<router-link to="/login" class="nav-link"
-								>Log In</router-link
-							>
-						</div>
-						<div class="nav-item" v-if="!isLoggedIn">
-							<router-link to="/register" class="nav-link"
-								>Register</router-link
+						<div class="nav-item">
+							<router-link to="/resume" class="nav-link"
+								>Resume</router-link
 							>
 						</div>
 

@@ -91,7 +91,7 @@
 			<!-- Carousel -->
 			<div class="divider">
                 <div :style="`color: white; z-index: 5; background: linear-gradient(100deg,  var(--red) 55%, transparent); width: 100vw; height: 80px; display: flex; align-items: center; justify-content: center`">
-					<h1>Projects & Experiences</h1>
+					<h1 id="experience">Projects & Experiences</h1>
                 </div>
 				<carousel :items-to-show="1">
 					<slide

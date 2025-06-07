@@ -1,5 +1,5 @@
 <template>
-	<a v-if="resume" class="white" :href="link" target="_blank">
+	<a v-if="resume" class="white" :href="link" target="_blank" @mousedown="startLongClick" @mouseup="endLongClick" @mouseleave="cancelLongClick" @touchstart="startLongClick" @touchend="endLongClick" @touchcancel="cancelLongClick">
 		<div class="icon" title="Resume">
 			<img src="../assets/Resume.svg" class="resumeIcon" />
 		</div>
@@ -42,6 +42,12 @@ export default {
 			default: false,
 		},
 	},
+	data() {
+		return {
+			longClickTimer: null,
+			isLongClick: false,
+		};
+	},
 	methods: {
 		copyDiscord() {
 			navigator.clipboard.writeText(this.link);
@@ -51,6 +57,39 @@ export default {
 				type: "success",
 			});
 		},
+		startLongClick(event) {
+			this.isLongClick = false;
+			this.longClickTimer = setTimeout(() => {
+				this.isLongClick = true;
+				event.preventDefault();
+				this.$router.push('/resume/dl');
+			}, 1000); // 1 second
+		},
+		endLongClick(event) {
+			if (this.longClickTimer) {
+				clearTimeout(this.longClickTimer);
+				this.longClickTimer = null;
+			}
+			
+			// If it was a long click, prevent the default link behavior
+			if (this.isLongClick) {
+				event.preventDefault();
+				return false;
+			}
+		},
+		cancelLongClick() {
+			if (this.longClickTimer) {
+				clearTimeout(this.longClickTimer);
+				this.longClickTimer = null;
+			}
+			this.isLongClick = false;
+		},
+	},
+	beforeDestroy() {
+		// Clean up timer if component is destroyed
+		if (this.longClickTimer) {
+			clearTimeout(this.longClickTimer);
+		}
 	},
 	mounted() {
 		console.log("\n----- NEW ICON -----");

@@ -1,50 +1,60 @@
 <template>
-	<div class="skewbox-parent" v-if="maintainSkewbox || windowWidth >= 1200">
-		<div class="bgs">
-			<div class="bg" :style="leftBG">
-                <div v-if="matrix">
-                    <div class="background">
-						<Matrix :height="windowHeight" :width="5140"/>
-					</div>
-                </div></div>
-			<div class="bg" :style="rightBG" style="right: 0 !important"></div>
-		</div>
-		<div class="poly--holder">
-			<div class="poly-item" :style="'background: ' + leftColor">
-				<div class="poly-content poly-left">
-					<slot name="left"></slot>
-				</div>
-			</div>
-			<div class="poly-item" :style="'background: ' + rightColor">
-				<div class="poly-content poly-right">
-					<slot name="right"></slot>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div v-else class="h-100">
+	<div :class="{ 'resizeable': !noResize }">
 		<div
-			:style="
-				'transform: scaleY(' +
-				(invert ? '-' : '') +
-				'1); background-position: center; background-size: cover; background-image: ' +
-				(pictureSide == 'right'
-					? rightBG.backgroundImage
-					: leftBG.backgroundImage)
-			"
-			style="width: 100% !important; height: 100% !important"
+			class="skewbox-parent"
+			v-if="maintainSkewbox || windowWidth >= 1200"
 		>
+			<div class="bgs">
+				<div class="bg" :style="leftBG">
+					<div v-if="matrix">
+						<div class="background">
+							<Matrix :height="windowHeight" :width="5140" />
+						</div>
+					</div>
+				</div>
+				<div
+					class="bg"
+					:style="rightBG"
+					style="right: 0 !important"
+				></div>
+			</div>
+			<div class="poly--holder">
+				<div class="poly-item" :style="'background: ' + leftColor">
+					<div class="poly-content poly-left">
+						<slot name="left"></slot>
+					</div>
+				</div>
+				<div class="poly-item" :style="'background: ' + rightColor">
+					<div class="poly-content poly-right">
+						<slot name="right"></slot>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div v-else class="h-100">
 			<div
 				:style="
 					'transform: scaleY(' +
 					(invert ? '-' : '') +
-					'1); display: flex; align-items: center; background-color: var(--grayBG); color: white; height: 100%; width: 100%;'
+					'1); background-position: center; background-size: cover; background-image: ' +
+					(pictureSide == 'right'
+						? rightBG.backgroundImage
+						: leftBG.backgroundImage)
 				"
+				style="width: 100% !important; height: 100% !important"
 			>
-				<div class="container">
-					<slot
-						:name="pictureSide == 'right' ? 'left' : 'right'"
-					></slot>
+				<div
+					:style="
+						'transform: scaleY(' +
+						(invert ? '-' : '') +
+						'1); display: flex; align-items: center; background-color: var(--grayBG); color: white; height: 100%; width: 100%;'
+					"
+				>
+					<div class="container">
+						<slot
+							:name="pictureSide == 'right' ? 'left' : 'right'"
+						></slot>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -52,7 +62,7 @@
 </template>
 
 <script>
-import Matrix from './Matrix.vue';
+import Matrix from "./Matrix.vue";
 export default {
 	props: {
 		leftColor: {
@@ -115,7 +125,7 @@ export default {
 			default: false,
 			required: false,
 		},
-        matrix: {
+		matrix: {
 			type: Boolean,
 			default: false,
 			required: false,
@@ -125,10 +135,15 @@ export default {
 			default: "hsla(0, 0%, 0%, 0.6)",
 			required: false,
 		},
+		noResize: {
+			type: Boolean,
+			default: false,
+			required: false,
+		},
 	},
-    components: {
-        Matrix
-    },
+	components: {
+		Matrix,
+	},
 	data() {
 		return {
 			x: 0,
@@ -253,56 +268,57 @@ export default {
 ██      ██ ███████ ██████  ██ ██   ██      ██████   ██████  ███████ ██   ██ ██ ███████ ███████ 
 */
 @media (max-width: 1199.9px) {
-	.skewbox-parent {
-		--propHeight: calc((0.7 * v-bind(cssHeight)) + 1px);
-	}
+  .resizable .skewbox-parent {
+    --propHeight: calc((0.7 * v-bind(cssHeight)) + 1px);
+  }
 
-	.poly-content {
-		padding: 0;
-	}
+  .resizable .poly-content {
+    padding: 0;
+  }
 
-	.poly-right {
-		padding-right: 1rem;
-	}
+  .resizable .poly-right {
+    padding-right: 1rem;
+  }
 
-	.poly-left {
-		padding-left: 1rem;
-	}
+  .resizable .poly-left {
+    padding-left: 1rem;
+  }
 }
 
 @media (max-width: 767.9px) {
-	.skewbox-parent {
-		--propHeight: calc(0.6999 * v-bind(cssHeight));
-	}
+  .resizable .skewbox-parent {
+    --propHeight: calc(0.6999 * v-bind(cssHeight));
+  }
 
-	.poly-content {
-		padding: 0;
-	}
+  .resizable .poly-content {
+    padding: 0;
+  }
 
-	.poly-right {
-		transform: skew(10deg) translateX(-20px);
-	}
+  .resizable .poly-right {
+    transform: skew(10deg) translateX(-20px);
+  }
 
-	.poly-left {
-		transform: skew(10deg) translateX(20px);
-	}
+  .resizable .poly-left {
+    transform: skew(10deg) translateX(20px);
+  }
 
-	.content {
-		padding: 0 !important;
-	}
+  .resizable .content {
+    padding: 0 !important;
+  }
 }
 
 @media (max-width: 575.9px) {
-	.skewbox-parent {
-		--propHeight: calc(0.5999 * v-bind(cssHeight));
-	}
+  .resizable .skewbox-parent {
+    --propHeight: calc(0.5999 * v-bind(cssHeight));
+  }
 
-	.poly-right {
-		transform: skew(10deg) translateX(-35px);
-	}
+  .resizable .poly-right {
+    transform: skew(10deg) translateX(-35px);
+  }
 
-	.poly-left {
-		transform: skew(10deg) translateX(35px);
-	}
+  .resizable .poly-left {
+    transform: skew(10deg) translateX(35px);
+  }
 }
+
 </style>

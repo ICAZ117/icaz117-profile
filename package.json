@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "@kyvg/vue3-notification": "^2.3.4",
+    "@tato30/vue-pdf": "^1.11.3",
     "core-js": "^3.6.5",
     "firebase": "^10.0.0",
     "vue": "^3.0.0",
