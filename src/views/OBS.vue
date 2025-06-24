@@ -24,10 +24,10 @@
 		<br />
 		<h1>Ibraheem Cazalas</h1>
 		<br />
-		<h5>Full Stack & Software Developer</h5>
-		<br />
-		<h5>Junior Data Scientist</h5>
-		<h5>at Lakeland Regional Health</h5>
+		<!-- <h5>Full Stack & Software Developer</h5>
+		<br /> -->
+		<h5>{{ homePage.position.role || "" }}</h5>
+		<h5>at {{ homePage.position.company || "" }}</h5>
 	</div>
 </template>
 
