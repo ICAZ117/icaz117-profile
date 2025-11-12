@@ -90,6 +90,15 @@ const routes = [
     // 		requiresAuth: true,
     // 	},
     // },
+    // Catch-all dynamic route for redirects
+    {
+        path: "/:customRoute",
+        name: "DynamicRedirect",
+        component: () => import("../views/DynamicRedirect.vue"),
+        meta: {
+            title: "Redirecting... | ICAZ117"
+        }
+    }
 ];
 
 const router = createRouter({
