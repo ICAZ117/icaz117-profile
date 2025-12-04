@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
-import Register from "../views/Register.vue";
 import OBS from "../views/OBS.vue";
 import Resume from "../views/Resume.vue";
 import ResumeDL from "../views/ResumeDL.vue";
+import RouterAdmin from "../views/RouterAdmin.vue";
 
 const routes = [
     {
@@ -22,14 +22,6 @@ const routes = [
         component: Login,
         meta: {
             title: "Login | ICAZ117"
-        }
-    },
-    {
-        path: "/register",
-        name: "Register",
-        component: Register,
-        meta: {
-            title: "Register | ICAZ117"
         }
     },
     {
@@ -72,24 +64,15 @@ const routes = [
             title: "Resume | ICAZ117"
         }
     },
-    // {
-    // 	path: "/game",
-    // 	name: "HiLo",
-    // 	component: HiLo,
-    // 	meta: {
-    //         title: "Hi-Lo | ICAZ117",
-    // 		requiresAuth: true,
-    // 	},
-    // },
-    // {
-    // 	path: "/leaderboard",
-    // 	name: "Leaderboard",
-    // 	component: Leaderboard,
-    // 	meta: {
-    //         title: "Leaderboard | ICAZ117",
-    // 		requiresAuth: true,
-    // 	},
-    // },
+    {
+        path: "/admin",
+        name: "Admin",
+        component: RouterAdmin,
+        meta: {
+            title: "Admin | ICAZ117",
+            requiresAuth: true,
+        },
+    },
     // Catch-all dynamic route for redirects
     {
         path: "/:customRoute(.*)",
@@ -124,10 +107,9 @@ router.beforeEach(async (to, from, next) => {
         if (await getCurrentUser()) {
             next();
         } else {
-            alert(
-                "*In General Kenobi's Voice* This is not the page you're looking for!"
-            );
-            next("/");
+            // If not authenticated, send to login and include the original destination so
+            // the login page can redirect back after successful sign-in.
+            next({ path: "/login", query: { redirect: to.fullPath } });
         }
     }
     else if ((from.path === "/resume" && to.path === "/resume/dl") || (from.path === "/resume/dl" && to.path === "/resume")) {
