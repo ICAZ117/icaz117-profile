@@ -92,7 +92,7 @@ const routes = [
     // },
     // Catch-all dynamic route for redirects
     {
-        path: "/:customRoute",
+        path: "/:customRoute(.*)",
         name: "DynamicRedirect",
         component: () => import("../views/DynamicRedirect.vue"),
         meta: {
