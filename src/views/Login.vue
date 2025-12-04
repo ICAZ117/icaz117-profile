@@ -70,7 +70,9 @@
                         // Get the user's username from the database
                         this.$store.dispatch("fetchUser");
 
-						this.$router.push("/");
+						// Redirect back to intended destination if provided
+						const redirect = this.$route.query.redirect || "/";
+						this.$router.push(redirect);
 					})
 					.catch((error) => {
                         let message = "";
